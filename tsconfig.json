@@ -8,7 +8,9 @@
     "declarationDir": "types",
     "target": "es6",
     "module": "es6",
-    "moduleResolution": "node"
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "emitDeclarationOnly": true,
   },
   "include": [
     "src"

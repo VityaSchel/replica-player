@@ -43,6 +43,8 @@ Tested with
 - create-react-app@5.0.1
 - Next.js
 
+Library is builded with several versions: `'replica-player/dist'` is native build for internal use, `'replica-player/dist/cjs'` is for CommonJS users, `'replica-player/dist/esm'` is for ES modules users (default).
+
 ### Use with React
 
 Developed with React 18.2.0
