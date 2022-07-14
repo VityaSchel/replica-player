@@ -1,3 +1,3 @@
-import ReplicaPlayer from './player'
+import ReplicaPlayer from './components/player'
 
 export default ReplicaPlayer

@@ -1,0 +1,5 @@
+{
+  "warnings": {
+    "styles_are_not_loaded": "The index.css file with styles was not loaded. Please follow the replica-player documentation for correct player operation."
+  }
+}

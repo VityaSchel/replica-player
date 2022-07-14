@@ -7,11 +7,18 @@
     "strict": true,
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "declaration": true,
     "declarationDir": "types",
     "emitDeclarationOnly": true,
+    "baseUrl": ".",
+    "paths": {
+      "/*": [
+        "./src/*"
+      ]
+    }
   },
   "include": [
     "src"

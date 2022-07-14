@@ -1,0 +1,25 @@
+.stylesAreNotLoadedWarning {
+  display: none;
+}
+
+.replicaPlayer {
+  display: block !important;
+  background-color: red;
+
+  .videoPlayer {
+    width: 100%;
+    height: 100%;
+
+    &.aspectRatioMode {
+      &Fit {
+        object-fit: contain;
+      }
+      &Cover {
+        object-fit: cover;
+      }
+      &Resize {
+        object-fit: fill;
+      }
+    }
+  }
+}

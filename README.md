@@ -37,19 +37,22 @@ npm i replica-player
 yarn add replica-player
 ```
 
-Compiled with TypeScript, bundled with Rollup.
+Compiled with TypeScript, bundled with Rollup. Building is done for CJS. If you need ESM code, you can follow instructions in [CONTRIBUTING.md](./CONTRIBUTING.md) file.
 
 Tested with
 - create-react-app@5.0.1
-- Next.js
+- Next.js@12.2.2
 
 ### Use with React
 
 Developed with React 18.2.0
 
+You must import `replica-player/dist/index.css` along with the component itself. For SSR and Next.js, import css globally in pages/_app.js file.
+
 ```tsx
 import React from 'react'
 import ReplicaPlayer from 'replica-player'
+import 'replica-player/dist/index.css'
 
 export default function YourApp() {
   // Component can hold a ref
