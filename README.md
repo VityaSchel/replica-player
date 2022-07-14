@@ -49,7 +49,7 @@ Developed with React 18.2.0
 
 You must import `replica-player/dist/index.css` along with the component itself. For SSR and Next.js, import css globally in pages/_app.js file.
 
-```tsx
+```jsx
 import React from 'react'
 import ReplicaPlayer from 'replica-player'
 import 'replica-player/dist/index.css'
@@ -78,3 +78,5 @@ Prop|Type|Description
 src|string|Media source
 
 #### Ref API reference
+
+[Todo]
