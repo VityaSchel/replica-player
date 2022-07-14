@@ -1,15 +1,16 @@
 {
   "compilerOptions": {
-    "strict": true,
+    "target": "es5",
+    "module": "esnext",
     "jsx": "react",
-    "declaration": true,
-    "esModuleInterop": true,
     "outDir": "dist",
-    "declarationDir": "types",
-    "target": "es6",
-    "module": "es6",
+    "strict": true,
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "declaration": true,
+    "declarationDir": "types",
     "emitDeclarationOnly": true,
   },
   "include": [
