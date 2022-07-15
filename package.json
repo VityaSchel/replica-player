@@ -52,6 +52,7 @@
   "dependencies": {
     "i18next": "^21.8.14",
     "i18next-browser-languagedetector": "^6.1.4",
-    "react-i18next": "^11.18.1"
+    "react-i18next": "^11.18.1",
+    "yup": "^0.32.11"
   }
 }
