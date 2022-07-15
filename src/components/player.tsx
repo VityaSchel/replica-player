@@ -2,17 +2,19 @@ import * as React from 'react'
 import styles from '../styles.module.scss'
 import NoStylesWarning from './NoStylesWarning'
 import VideoPlayer from './videoPlayer'
-import Controls from './Controls'
+import Title from './Foreground/Title'
+import Controls from './Foreground/Controls'
 import * as Yup from 'yup'
-import * as utils from '/utils'
-
-interface PlayerPropsEx extends PlayerProps {
-  [key: string]: any
-}
+// import * as utils from '/utils'
 
 export interface PlayerProps {
   src: string
-  bob: string
+  width?: number
+  height?: number
+  componentsProps?: {
+    container?: { [key: string]: any }
+    controls?: { [key: string]: any }
+  }
 }
 
 const propsSchema = {
@@ -20,19 +22,29 @@ const propsSchema = {
     .url()
     .required()
 } as const
-export default function Player(props: PlayerPropsEx) {
-  // const internalProps = Object.keys(propsSchema) as Array<keyof typeof propsSchema>
-  const { restProps, internalProps } = utils.splitProps<PlayerProps>(props, propsSchema)
+
+export default function Player(props: PlayerProps) {
+  React.useEffect(() => {
+    Yup.object(propsSchema).validateSync(props)
+  }, [props])
 
   return (
     <>
       <NoStylesWarning />
       <div 
         className={styles.replicaPlayer} 
-        style={{ display: 'none' }}
+        style={{ 
+          display: 'none', // NoStylesWarning
+
+          width: props.width, height: props.height
+        }}
+        {...props.componentsProps?.container}
       >
-        <VideoPlayer {...internalProps} />
-        <Controls />
+        <VideoPlayer {...props} />
+        <div className={styles.foreground}>
+          <Title {...props} />
+          <Controls {...props} />
+        </div>
       </div>
     </>
   )

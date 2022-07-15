@@ -21,6 +21,12 @@ export default [
     plugins: [
       external(),
       typescript({ tsconfig: './tsconfig.json' }),
+      rootImport({
+        root: `${__dirname}/src`,
+        useInput: 'prepend',
+
+        extensions: ['.tsx', '.ts', '.js'],
+      }),
       postcss({
         extract: 'index.css',
         modules: true,
@@ -29,12 +35,7 @@ export default [
       json(),
       resolve(),
 
-      rootImport({
-        root: `${__dirname}/src`,
-        useInput: 'prepend',
-
-        extensions: ['.tsx', '.ts', '.js'],
-      }),
+      
       commonjs(),
     ]
   },
