@@ -4,6 +4,8 @@ import styles from './styles.module.scss'
 import List, { ListItem } from './List'
 import cx from 'classnames'
 import { useTranslation } from 'react-i18next'
+import { usePopper } from 'react-popper'
+import { useHotkeys } from 'react-hotkeys-hook'
 
 import RepeatIcon from './icons/repeat.svg'
 import LinkIcon from './icons/link.svg'
@@ -11,7 +13,6 @@ import CodeIcon from './icons/code.svg'
 import BugIcon from './icons/bug.svg'
 import InfoIcon from './icons/info.svg'
 import QuestionIcon from './icons/question.svg'
-import { usePopper } from 'react-popper'
 
 export interface ContextMenuRefMethods {
   open: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
@@ -26,7 +27,7 @@ function generateGetBoundingClientRect(x = 0, y = 0) {
     x, y,
     bottom: y,
     left: x,
-    toJSON: () => {}
+    toJSON: () => {/**/}
   })
 }
 
@@ -36,33 +37,38 @@ const virtualReference = {
 
 const ContextMenu = React.forwardRef((props, ref) => {
   const [visible, setVisible] = React.useState(false)
-  const [menuPosition, setMenuPosition] = React.useState<{ x: number, y: number }>({ x: 0, y: 0 })
   const { t } = useTranslation()
-  const menuRef = React.useRef(null)
+  const menuRef = React.useRef<HTMLDivElement>(null)
   const popper = usePopper(virtualReference, menuRef.current, {
-    // modifiers: [{ name: 'arrow', options: { element: arrowElement } }],
     placement: 'right-start',
   })
-
-  console.log(popper)
+  useHotkeys('esc', () => visible && setVisible(false), {}, [visible, setVisible])
 
   const methods: ContextMenuRefMethods = {
     open(event) {
       event.preventDefault()
-      console.log(1, generateGetBoundingClientRect(event.clientX, event.clientY)())
       virtualReference.getBoundingClientRect = generateGetBoundingClientRect(event.clientX, event.clientY)
       popper.update?.()
       // todo: open native cotext menu on video itself
-      // setMenuPosition({ x: event.clientX, y: event.clientY })
       setVisible(true)
+      menuRef.current?.focus()
       return false
     }
   }
+
   React.useImperativeHandle(ref, () => methods)
 
   const handleSelectItem = itemID => () => {
     setVisible(false)
   }
+
+  React.useEffect(() => {
+    if(visible) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+  }, [visible])
 
   return ReactDOM.createPortal(
     <div 
@@ -70,7 +76,9 @@ const ContextMenu = React.forwardRef((props, ref) => {
       className={cx(styles.menuContainer, { [styles.visible]: visible })}
       ref={menuRef}
       style={popper.styles.popper}
-      {...popper.attributes}
+      // {...popper.attributes}
+      tabIndex={-1}
+      onBlur={() => setVisible(false)}
     >
       <List>
         <ListItem 
