@@ -95,6 +95,10 @@ const ContextMenu = React.forwardRef((props, ref) => {
         copy('Nothing here ¯\\_(ツ)_/¯')
         break
 
+      case 'playback_support':
+        window.open('https://support.google.com/youtube/?p=report_playback', '_blank')
+        break
+
       default:
         break
     }
@@ -149,9 +153,9 @@ const ContextMenu = React.forwardRef((props, ref) => {
         />
         <ListItem 
           icon={<QuestionIcon />} 
-          title={t('player.context_menu.playback_support')} 
+          title={t('player.context_menu.playback_support')}
+          // href='https://support.google.com/youtube/?p=report_playback'
           onClick={handleSelectItem('playback_support')}
-          href='https://support.google.com/youtube/?p=report_playback'
         />
         <ListItem 
           icon={<InfoIcon />} 

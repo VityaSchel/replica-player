@@ -19,7 +19,7 @@ export default function List(props: ListProps) {
 interface ListItemProps {
   title: string
   icon?: React.ReactNode
-  onClick: () => void
+  onClick?: () => void
   endIcon?: React.ReactNode
   href?: string
 }
@@ -32,10 +32,10 @@ export function ListItem(props: ListItemProps) {
       <span className={styles.endIcon}>{props.endIcon}</span>
     </>
   )
-  
+
   if(props.href) {
     return (
-      <a className={styles.item} href={props.href}>
+      <a className={styles.item} href={props.href} target='_blank' rel='noreferrer' onClick={props.onClick}>
         {content}
       </a>
     )
