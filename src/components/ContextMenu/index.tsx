@@ -6,6 +6,9 @@ import cx from 'classnames'
 import { useTranslation } from 'react-i18next'
 import { usePopper } from 'react-popper'
 import { useHotkeys } from 'react-hotkeys-hook'
+import { PlayerContext } from '../player'
+import { useAppDispatch, useAppSelector } from '/store/hooks'
+import { selectPlayback, setIsLooped } from '/store/slices/playback'
 
 import RepeatIcon from './icons/repeat.svg'
 import LinkIcon from './icons/link.svg'
@@ -13,6 +16,7 @@ import CodeIcon from './icons/code.svg'
 import BugIcon from './icons/bug.svg'
 import InfoIcon from './icons/info.svg'
 import QuestionIcon from './icons/question.svg'
+import CheckmarkIcon from './icons/checkmark.svg'
 
 export interface ContextMenuRefMethods {
   open: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
@@ -35,6 +39,13 @@ const virtualReference = {
   getBoundingClientRect: generateGetBoundingClientRect(),
 }
 
+type MenuItemID = 'loop'
+  | 'copy_video_url'
+  | 'copy_video_html_code'
+  | 'copy_debug_data'
+  | 'playback_support'
+  | 'sysadmin_statistics'
+
 const ContextMenu = React.forwardRef((props, ref) => {
   const [visible, setVisible] = React.useState(false)
   const { t } = useTranslation()
@@ -42,6 +53,9 @@ const ContextMenu = React.forwardRef((props, ref) => {
   const popper = usePopper(virtualReference, menuRef.current, {
     placement: 'right-start',
   })
+  const playerContext = React.useContext(PlayerContext)
+  const playbackState = useAppSelector(selectPlayback)
+  const dispatch = useAppDispatch()
   useHotkeys('esc', () => visible && setVisible(false), {}, [visible, setVisible])
 
   const methods: ContextMenuRefMethods = {
@@ -58,8 +72,19 @@ const ContextMenu = React.forwardRef((props, ref) => {
 
   React.useImperativeHandle(ref, () => methods)
 
-  const handleSelectItem = itemID => () => {
+  const handleSelectItem = (itemID: MenuItemID) => () => {
+    if(!playerContext) return
+
     setVisible(false)
+    switch(itemID) {
+      case 'loop':
+        playerContext.loop = !playbackState.loop
+        dispatch(setIsLooped(!playbackState.loop))
+        break
+
+      default:
+        break
+    }
   }
 
   React.useEffect(() => {
@@ -84,7 +109,8 @@ const ContextMenu = React.forwardRef((props, ref) => {
         <ListItem 
           icon={<RepeatIcon />} 
           title={t('player.context_menu.repeat')} 
-          onClick={handleSelectItem('repeat')}
+          onClick={handleSelectItem('loop')}
+          endIcon={playbackState.loop && <CheckmarkIcon />}
         />
         <ListItem 
           icon={<LinkIcon />} 

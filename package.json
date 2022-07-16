@@ -54,12 +54,14 @@
   "dependencies": {
     "@mui/base": "^5.0.0-alpha.89",
     "@popperjs/core": "^2.11.5",
+    "@reduxjs/toolkit": "^1.8.3",
     "classnames": "^2.3.1",
     "i18next": "^21.8.14",
     "i18next-browser-languagedetector": "^6.1.4",
     "react-hotkeys-hook": "^3.4.6",
     "react-i18next": "^11.18.1",
     "react-popper": "^2.3.0",
+    "react-redux": "^8.0.2",
     "yup": "^0.32.11"
   }
 }

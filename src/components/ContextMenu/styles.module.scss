@@ -26,7 +26,8 @@
       display: flex;
       align-items: center;
 
-      .icon {
+      .icon,
+      .endIcon {
         padding: 0 10px;
         
         svg {
@@ -38,6 +39,7 @@
       .text {
         font-size: 12.98px;
         font-weight: 500;
+        flex: 1;
       }
 
       &:hover {

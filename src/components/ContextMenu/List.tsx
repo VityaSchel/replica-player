@@ -20,6 +20,7 @@ interface ListItemProps {
   title: string
   icon?: React.ReactNode
   onClick: () => void
+  endIcon?: React.ReactNode
 }
 
 export function ListItem(props: ListItemProps) {
@@ -27,6 +28,7 @@ export function ListItem(props: ListItemProps) {
     <div className={styles.item} onClick={props.onClick}>
       <span className={styles.icon}>{props.icon}</span>
       <span className={styles.text}>{props.title}</span>
+      <span className={styles.endIcon}>{props.endIcon}</span>
     </div>
   )
 }
