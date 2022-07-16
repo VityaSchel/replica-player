@@ -3,9 +3,11 @@
   opacity: 0;
   transition: opacity .1s cubic-bezier(0, 0, 0.2, 1);
   width: 407px;
+  pointer-events: none;
 
   &.visible {
     opacity: 1;
+    pointer-events: unset;
   }
 
   .list {

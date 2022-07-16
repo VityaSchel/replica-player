@@ -1,4 +1,5 @@
 import React from 'react'
+import ReactDOM from 'react-dom'
 import styles from './styles.module.scss'
 import List, { ListItem } from './List'
 import cx from 'classnames'
@@ -10,20 +11,49 @@ import CodeIcon from './icons/code.svg'
 import BugIcon from './icons/bug.svg'
 import InfoIcon from './icons/info.svg'
 import QuestionIcon from './icons/question.svg'
+import { usePopper } from 'react-popper'
 
 export interface ContextMenuRefMethods {
   open: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void
 }
 
+function generateGetBoundingClientRect(x = 0, y = 0) {
+  return () => ({
+    width: 0,
+    height: 0,
+    top: y,
+    right: x,
+    x, y,
+    bottom: y,
+    left: x,
+    toJSON: () => {}
+  })
+}
+
+const virtualReference = {
+  getBoundingClientRect: generateGetBoundingClientRect(),
+}
+
 const ContextMenu = React.forwardRef((props, ref) => {
   const [visible, setVisible] = React.useState(false)
+  const [menuPosition, setMenuPosition] = React.useState<{ x: number, y: number }>({ x: 0, y: 0 })
   const { t } = useTranslation()
+  const menuRef = React.useRef(null)
+  const popper = usePopper(virtualReference, menuRef.current, {
+    // modifiers: [{ name: 'arrow', options: { element: arrowElement } }],
+    placement: 'right-start',
+  })
+
+  console.log(popper)
 
   const methods: ContextMenuRefMethods = {
     open(event) {
-      console.log(event)
       event.preventDefault()
+      console.log(1, generateGetBoundingClientRect(event.clientX, event.clientY)())
+      virtualReference.getBoundingClientRect = generateGetBoundingClientRect(event.clientX, event.clientY)
+      popper.update?.()
       // todo: open native cotext menu on video itself
+      // setMenuPosition({ x: event.clientX, y: event.clientY })
       setVisible(true)
       return false
     }
@@ -34,8 +64,14 @@ const ContextMenu = React.forwardRef((props, ref) => {
     setVisible(false)
   }
 
-  return (
-    <div className={cx(styles.menuContainer, { [styles.visible]: visible })}>
+  return ReactDOM.createPortal(
+    <div 
+      // style={{ left: menuPosition.x, top: menuPosition.y }}
+      className={cx(styles.menuContainer, { [styles.visible]: visible })}
+      ref={menuRef}
+      style={popper.styles.popper}
+      {...popper.attributes}
+    >
       <List>
         <ListItem 
           icon={<RepeatIcon />} 
@@ -68,7 +104,8 @@ const ContextMenu = React.forwardRef((props, ref) => {
           onClick={handleSelectItem('sysadmin_statistics')}
         />
       </List>
-    </div>
+    </div>, 
+    document.body
   )
 })
 ContextMenu.displayName = 'ContextMenu'

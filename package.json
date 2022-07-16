@@ -33,6 +33,7 @@
     "@rollup/plugin-node-resolve": "^13.3.0",
     "@rollup/plugin-typescript": "^8.3.3",
     "@svgr/rollup": "^6.2.1",
+    "@types/react-dom": "^18.0.6",
     "@typescript-eslint/eslint-plugin": "^5.30.6",
     "@typescript-eslint/parser": "^5.30.6",
     "eslint": "^8.19.0",
@@ -51,10 +52,13 @@
     "react-dom": "^18.2.0"
   },
   "dependencies": {
+    "@mui/base": "^5.0.0-alpha.89",
+    "@popperjs/core": "^2.11.5",
     "classnames": "^2.3.1",
     "i18next": "^21.8.14",
     "i18next-browser-languagedetector": "^6.1.4",
     "react-i18next": "^11.18.1",
+    "react-popper": "^2.3.0",
     "yup": "^0.32.11"
   }
 }

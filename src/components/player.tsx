@@ -8,6 +8,7 @@ import * as Yup from 'yup'
 import Loading from './Loading'
 import ContextMenu, { ContextMenuRefMethods } from './ContextMenu'
 // import * as utils from '/utils'
+import NoSsr from '@mui/base/NoSsr'
 
 export interface PlayerProps {
   src: string
@@ -51,7 +52,9 @@ export default function Player(props: PlayerProps) {
           <Controls {...props} />
           <Loading {...props} />
         </div>
-        <ContextMenu ref={contextMenuRef} />
+        <NoSsr>
+          <ContextMenu ref={contextMenuRef} />
+        </NoSsr>
       </div>
     </>
   )
