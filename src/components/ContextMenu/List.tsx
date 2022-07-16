@@ -21,14 +21,29 @@ interface ListItemProps {
   icon?: React.ReactNode
   onClick: () => void
   endIcon?: React.ReactNode
+  href?: string
 }
 
 export function ListItem(props: ListItemProps) {
-  return (
-    <div className={styles.item} onClick={props.onClick}>
+  const content = (
+    <>
       <span className={styles.icon}>{props.icon}</span>
       <span className={styles.text}>{props.title}</span>
       <span className={styles.endIcon}>{props.endIcon}</span>
-    </div>
+    </>
   )
+  
+  if(props.href) {
+    return (
+      <a className={styles.item} href={props.href}>
+        {content}
+      </a>
+    )
+  } else {
+    return (
+      <div className={styles.item} onClick={props.onClick}>
+        {content}
+      </div>
+    )
+  }
 }

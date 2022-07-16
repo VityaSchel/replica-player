@@ -9,6 +9,7 @@ import { useHotkeys } from 'react-hotkeys-hook'
 import { PlayerContext } from '../player'
 import { useAppDispatch, useAppSelector } from '/store/hooks'
 import { selectPlayback, setIsLooped } from '/store/slices/playback'
+import copy from 'copy-to-clipboard'
 
 import RepeatIcon from './icons/repeat.svg'
 import LinkIcon from './icons/link.svg'
@@ -48,6 +49,7 @@ type MenuItemID = 'loop'
 
 const ContextMenu = React.forwardRef((props, ref) => {
   const [visible, setVisible] = React.useState(false)
+  const [blurring, setBlurring] = React.useState(false)
   const { t } = useTranslation()
   const menuRef = React.useRef<HTMLDivElement>(null)
   const popper = usePopper(virtualReference, menuRef.current, {
@@ -60,13 +62,16 @@ const ContextMenu = React.forwardRef((props, ref) => {
 
   const methods: ContextMenuRefMethods = {
     open(event) {
-      event.preventDefault()
-      virtualReference.getBoundingClientRect = generateGetBoundingClientRect(event.clientX, event.clientY)
-      popper.update?.()
-      // todo: open native cotext menu on video itself
-      setVisible(true)
-      menuRef.current?.focus()
-      return false
+      if (!visible && !blurring) {
+        event.preventDefault()
+        virtualReference.getBoundingClientRect = generateGetBoundingClientRect(event.clientX, event.clientY)
+        popper.update?.()
+        setVisible(true)
+        menuRef.current?.focus()
+        return false
+      } else {
+        setVisible(false)
+      }
     }
   }
 
@@ -74,12 +79,20 @@ const ContextMenu = React.forwardRef((props, ref) => {
 
   const handleSelectItem = (itemID: MenuItemID) => () => {
     if(!playerContext) return
-
     setVisible(false)
+    menuRef.current?.blur()
     switch(itemID) {
       case 'loop':
         playerContext.loop = !playbackState.loop
         dispatch(setIsLooped(!playbackState.loop))
+        break
+
+      case 'copy_video_url':
+        copy(window.location.href)
+        break
+
+      case 'copy_debug_data':
+        copy('Nothing here ¯\\_(ツ)_/¯')
         break
 
       default:
@@ -95,6 +108,13 @@ const ContextMenu = React.forwardRef((props, ref) => {
     }
   }, [visible])
 
+  const handleBlur = () => {
+    setVisible(false)
+
+    setBlurring(true)
+    setTimeout(() => setBlurring(false), 1)
+  }
+
   return ReactDOM.createPortal(
     <div 
       // style={{ left: menuPosition.x, top: menuPosition.y }}
@@ -103,7 +123,7 @@ const ContextMenu = React.forwardRef((props, ref) => {
       style={popper.styles.popper}
       // {...popper.attributes}
       tabIndex={-1}
-      onBlur={() => setVisible(false)}
+      onBlur={handleBlur}
     >
       <List>
         <ListItem 
@@ -131,6 +151,7 @@ const ContextMenu = React.forwardRef((props, ref) => {
           icon={<QuestionIcon />} 
           title={t('player.context_menu.playback_support')} 
           onClick={handleSelectItem('playback_support')}
+          href='https://support.google.com/youtube/?p=report_playback'
         />
         <ListItem 
           icon={<InfoIcon />} 
