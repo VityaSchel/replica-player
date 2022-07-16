@@ -5,6 +5,7 @@ import VideoPlayer from './videoPlayer'
 import Title from './Foreground/Title'
 import Controls from './Foreground/Controls'
 import * as Yup from 'yup'
+import Loading from './Loading'
 // import * as utils from '/utils'
 
 export interface PlayerProps {
@@ -42,8 +43,9 @@ export default function Player(props: PlayerProps) {
       >
         <VideoPlayer {...props} />
         <div className={styles.foreground}>
-          <Title {...props} />
+          <Title title='Test' {...props} />
           <Controls {...props} />
+          <Loading {...props} />
         </div>
       </div>
     </>
