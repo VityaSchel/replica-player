@@ -6,6 +6,7 @@ import external from 'rollup-plugin-peer-deps-external'
 import postcss from 'rollup-plugin-postcss'
 import rootImport from 'rollup-plugin-root-import'
 import json from '@rollup/plugin-json'
+import svgr from '@svgr/rollup'
 
 const packageJson = require('./package.json')
 
@@ -20,6 +21,7 @@ export default [
     ],
     plugins: [
       external(),
+      svgr(),
       typescript({ tsconfig: './tsconfig.json' }),
       rootImport({
         root: `${__dirname}/src`,

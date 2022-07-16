@@ -6,6 +6,7 @@ import Title from './Foreground/Title'
 import Controls from './Foreground/Controls'
 import * as Yup from 'yup'
 import Loading from './Loading'
+import ContextMenu, { ContextMenuRefMethods } from './ContextMenu'
 // import * as utils from '/utils'
 
 export interface PlayerProps {
@@ -25,6 +26,8 @@ const propsSchema = {
 } as const
 
 export default function Player(props: PlayerProps) {
+  const contextMenuRef = React.useRef<ContextMenuRefMethods>()
+
   React.useEffect(() => {
     Yup.object(propsSchema).validateSync(props)
   }, [props])
@@ -39,6 +42,7 @@ export default function Player(props: PlayerProps) {
 
           width: props.width, height: props.height
         }}
+        onContextMenu={event => contextMenuRef.current?.open(event)}
         {...props.componentsProps?.container}
       >
         <VideoPlayer {...props} />
@@ -47,6 +51,7 @@ export default function Player(props: PlayerProps) {
           <Controls {...props} />
           <Loading {...props} />
         </div>
+        <ContextMenu ref={contextMenuRef} />
       </div>
     </>
   )
