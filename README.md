@@ -71,11 +71,17 @@ export default function YourApp() {
 
 #### Props
 
-Props that has types ends with `?` are optional.
+Props with types ending with `?` are optional.
 
-Prop|Type|Description
----|---|---
-src|string|Media source
+| Prop                      | Type    | Default   | Description                                                    |
+| ------------------------- | ------- | :-------- | -------------------------------------------------------------- |
+| src                       | string  | undefined | Media source                                                   |
+| width                     | number? | 640       | Width of player's container. Can be overriden with css styles  |
+| height                    | number? | 360       | Height of player's container. Can be overriden with css styles |
+| resizeMode                | string? | 'fit'     | One of 'fit', 'cover' and 'fill'                               |
+| componentsProps           | object? | undefined | Rest props for any components inside player                    |
+| componentsProps.container | object? | undefined | Props for player's container div                               |
+| componentsProps.controls  | object? | undefined | Props for player's controls                                    |
 
 #### Ref API reference
 

@@ -6,6 +6,9 @@ import external from 'rollup-plugin-peer-deps-external'
 import postcss from 'rollup-plugin-postcss'
 import rootImport from 'rollup-plugin-root-import'
 import json from '@rollup/plugin-json'
+import svgr from '@svgr/rollup'
+
+import postcssAutoprefixer from 'autoprefixer'
 
 const packageJson = require('./package.json')
 
@@ -20,21 +23,26 @@ export default [
     ],
     plugins: [
       external(),
+      svgr(),
       typescript({ tsconfig: './tsconfig.json' }),
-      postcss({
-        extract: 'index.css',
-        modules: true,
-        use: ['sass'],
-      }),
-      json(),
-      resolve(),
-
       rootImport({
         root: `${__dirname}/src`,
         useInput: 'prepend',
 
         extensions: ['.tsx', '.ts', '.js'],
       }),
+      postcss({
+        extract: 'index.css',
+        modules: {
+          generateScopedName: 'replicaPlayer_[local]_[hash:base64:5]',
+          hashPrefix: 'prefix'
+        },
+        autoModules: false,
+        use: ['sass'],
+        plugins: [postcssAutoprefixer]
+      }),
+      json(),
+      resolve(),      
       commonjs(),
     ]
   },

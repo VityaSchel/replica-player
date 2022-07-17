@@ -1,5 +1,16 @@
 {
   "warnings": {
-    "styles_are_not_loaded": "Файл index.css со стилями не загружен. Пожалуйста, следуйте документации replica-player для корректной работы плеера."
+    "styles_are_not_loaded": "Файл index.css со стилями не загружен. Пожалуйста, следуйте документации replica-player для корректной работы плеера.",
+    "loading_issues": "Подождите немного. Если воспроизведение так и не начнется, перезагрузите устройство."
+  },
+  "player": {
+    "context_menu": {
+      "repeat": "Повтор",
+      "copy_video_url": "Копировать URL видео",
+      "copy_video_html_code": "Копировать HTML-код",
+      "copy_debug_data": "Копировать данные для отладки",
+      "playback_support": "Решить проблему с воспроизведением",
+      "sysadmin_statistics": "Статистика для сисадминов"
+    }
   }
 }

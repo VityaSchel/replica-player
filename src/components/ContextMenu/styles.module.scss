@@ -1,0 +1,50 @@
+.menuContainer {
+  position: absolute;
+  opacity: 0;
+  transition: opacity .1s cubic-bezier(0, 0, 0.2, 1);
+  width: 407px;
+  pointer-events: none;
+
+  &.visible {
+    opacity: 1;
+    pointer-events: unset;
+  }
+
+  .list {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 0;
+    width: 100%;
+    border-radius: 2px;
+    background: rgba(28, 28, 28, .9);
+    text-shadow: 0 0 2px rgb(0 0 0 / 50%);
+
+    .item {
+      cursor: pointer;
+      color: #eee;
+      height: 40px;
+      display: flex;
+      align-items: center;
+
+      .icon,
+      .endIcon {
+        padding: 0 10px;
+        
+        svg {
+          width: 24px;
+          height: 24px;
+        }
+      }
+
+      .text {
+        font-size: 12.98px;
+        font-weight: 500;
+        flex: 1;
+      }
+
+      &:hover {
+        background-color: rgba(255, 255, 255, .1);
+      }
+    }
+  }
+}
