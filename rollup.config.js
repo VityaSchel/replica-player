@@ -8,6 +8,8 @@ import rootImport from 'rollup-plugin-root-import'
 import json from '@rollup/plugin-json'
 import svgr from '@svgr/rollup'
 
+import postcssAutoprefixer from 'autoprefixer'
+
 const packageJson = require('./package.json')
 
 export default [
@@ -31,13 +33,16 @@ export default [
       }),
       postcss({
         extract: 'index.css',
-        modules: true,
+        modules: {
+          generateScopedName: 'replicaPlayer_[local]_[hash:base64:5]',
+          hashPrefix: 'prefix'
+        },
+        autoModules: false,
         use: ['sass'],
+        plugins: [postcssAutoprefixer]
       }),
       json(),
-      resolve(),
-
-      
+      resolve(),      
       commonjs(),
     ]
   },

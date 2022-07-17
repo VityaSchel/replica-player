@@ -15,6 +15,7 @@ export interface PlayerProps {
   src: string
   width?: number
   height?: number
+  resizeMode?: 'fit' | 'cover' | 'fill'
   componentsProps?: {
     container?: { [key: string]: any }
     controls?: { [key: string]: any }

@@ -55,6 +55,7 @@
     "@mui/base": "^5.0.0-alpha.89",
     "@popperjs/core": "^2.11.5",
     "@reduxjs/toolkit": "^1.8.3",
+    "autoprefixer": "^10.4.7",
     "classnames": "^2.3.1",
     "copy-to-clipboard": "^3.3.1",
     "i18next": "^21.8.14",

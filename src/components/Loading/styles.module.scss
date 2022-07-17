@@ -8,9 +8,9 @@
   flex-direction: column;
   gap: 10px;
   align-items: center;
+  pointer-events: none;
 
   .spinnerContainer {
-    pointer-events: none;
     width: 64px;
     height: 64px;
     animation: ytp-spinner-linspin 1568.2352941176ms linear infinite;
