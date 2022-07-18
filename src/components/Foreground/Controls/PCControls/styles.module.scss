@@ -23,7 +23,7 @@
     margin: 0 12px;
     display: flex;
 
-    .controlsButton {
+    button.controlsButton {
       width: 46px;
       height: 48px;
       opacity: .9;
@@ -39,6 +39,24 @@
       display: flex;
       align-items: center;
       justify-content: center;
+
+      &[disabled] {
+        opacity: .5;
+        pointer-events: none;
+      }
+
+      &.hide {
+        display: none;
+      }
+    }
+
+    .left {
+      flex: 1;
+    }
+
+    .left,
+    .right {
+      display: flex;
     }
   }
 }
