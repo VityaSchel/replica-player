@@ -4,6 +4,7 @@ import PlayPauseIcon from '../icons/PlayPause'
 import { useAppDispatch, useAppSelector } from '/store/hooks'
 import { selectPlaybackState, setPlaybackState } from '/store/slices/playback'
 import { PlayerContext } from '/components/player'
+import cx from 'classnames'
 
 export default function PlayPause() {
   const playbackState = useAppSelector(selectPlaybackState)
@@ -16,7 +17,7 @@ export default function PlayPause() {
   }
 
   return (
-    <button className={styles.controlsButton} onClick={handleClick}>
+    <button className={cx(styles.controlsButton, styles.playControlButton)} onClick={handleClick}>
       <PlayPauseIcon playing={playbackState === 'playing'} />
     </button>
   )

@@ -117,11 +117,22 @@
 
   &.play {
     animation-name: iconAnimation__play;
+    animation-direction: normal;
     @include animatedIcon;
   }
 
   &.pause {
     animation-name: iconAnimation__pause;
     @include animatedIcon;
+  }
+}
+
+.clipPath {
+  transform: translate(0px, 0px);
+  transition: transform 300ms linear;
+  will-change: transform;
+
+  &.muted {
+    transform: translate(20px, 20px);
   }
 }
