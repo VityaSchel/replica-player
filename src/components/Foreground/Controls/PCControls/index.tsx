@@ -1,6 +1,7 @@
 import styles from './styles.module.scss'
 import { PlayerProps } from '/components/player'
 import PlayPause from './PlayPause'
+import { Backwards, Forwards } from './PlaylistButtons'
 
 export default function PCControls(props: PlayerProps) {
   return (
@@ -11,7 +12,14 @@ export default function PCControls(props: PlayerProps) {
         {...props.componentsProps?.controls}
       >
         <div className={styles.controls}>
-          <PlayPause />
+          <div className={styles.left}>
+            <Backwards />
+            <PlayPause />
+            <Forwards />
+          </div>
+          <div className={styles.right}>
+
+          </div>
         </div>
       </div>
     </>
