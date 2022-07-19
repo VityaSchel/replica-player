@@ -2,11 +2,12 @@ import React from 'react'
 import styles from './styles.module.scss'
 import PlayPauseIcon from '../icons/PlayPause'
 import { useAppDispatch, useAppSelector } from '/store/hooks'
-import { selectPlaybackIsMuted, selectPlaybackState, setMuted } from '/store/slices/playback'
+import { selectPlaybackIsMuted, selectPlaybackVolume, setVolume, setMuted } from '/store/slices/playback'
 import { PlayerContext } from '/components/player'
-import VolumeMute from '/components/Foreground/Controls/icons/Volume/VolumeMute'
+import VolumeIcon from '../icons/Volume'
 
 export default function Volume() {
+  const volume = useAppSelector(selectPlaybackVolume)
   const isMuted = useAppSelector(selectPlaybackIsMuted)
   const dispatch = useAppDispatch()
   const context = React.useContext(PlayerContext)
@@ -18,7 +19,12 @@ export default function Volume() {
 
   return (
     <button className={styles.controlsButton} onClick={handleClick}>
-      <VolumeMute muted={isMuted} />
+      <VolumeIcon
+        volume={volume}
+        setVolume={setVolume}
+        muted={isMuted}
+        setMuted={setMuted}
+      />
     </button>
   )
 }

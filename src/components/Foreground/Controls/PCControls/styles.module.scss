@@ -39,6 +39,11 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      transition: opacity 200ms ease-in-out;
+
+      &:hover {
+        opacity: 1;
+      }
 
       &[disabled] {
         opacity: .5;

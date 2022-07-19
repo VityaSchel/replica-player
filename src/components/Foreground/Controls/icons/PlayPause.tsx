@@ -1,4 +1,4 @@
-import styles from './animations.module.scss'
+import styles from './styles.module.scss'
 import cx from 'classnames'
 
 export default function PlayPause(props: { playing?: boolean }) {
