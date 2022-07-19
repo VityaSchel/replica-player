@@ -67,5 +67,11 @@
     .playControlButton {
       width: 46px;
     }
+
+    .volume {
+      width: 0;
+      transition: width .2s cubic-bezier(0.4, 0, 1, 1);
+      
+    }
   }
 }

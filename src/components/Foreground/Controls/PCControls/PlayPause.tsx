@@ -9,10 +9,10 @@ import cx from 'classnames'
 export default function PlayPause() {
   const playbackState = useAppSelector(selectPlaybackState)
   const dispatch = useAppDispatch()
-  const context = React.useContext(PlayerContext)
+  const player = React.useContext(PlayerContext)
 
   const handleClick = () => {
-    playbackState === 'playing' ? context?.pause() : context?.play()
+    playbackState === 'playing' ? player?.pause() : player?.play()
     dispatch(setPlaybackState(playbackState === 'playing' ? 'paused' : 'playing'))
   }
 

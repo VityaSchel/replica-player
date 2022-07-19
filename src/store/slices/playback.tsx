@@ -14,7 +14,7 @@ const initialState: PlaybackState = {
   state: 'loading',
   loop: false,
   speed: 1,
-  volume: 0,
+  volume: 1,
   muted: false
 }
 
