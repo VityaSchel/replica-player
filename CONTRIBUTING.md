@@ -17,3 +17,21 @@ Run `npm run build` which bundles /src folder with Rollup. You can edit src/roll
 ```
 4. Run `npm run build`
 5. Now you should see dist and dist-esm directories in the project
+
+## Directories
+
+/src is where the project lives. It must be compiled into /dist and then distributed. All files and components must be in /src except for tools that used for building/linting and special files.
+
+/src/components is where React components should be placed
+
+/src/data is where metadata stored (such as translation strings)
+
+/src/store is Player's storage (redux and reducers/slices)
+
+/src/components/Foreground is where all components in Player's foreground must be stored, user interface
+
+/src/components/Controls/icons is Controls icons, they mustn't have any context/redux logic and can only use props to change/render states
+
+/src/components/Controls/icons/animations is directory for SVGs animations metadata, such as 'd' attribute keyframes
+
+/src/components/VideoPlayer is HTML5 player's component and it's direct interactions, do not place any YouTube-related logic here
