@@ -32,14 +32,17 @@ export const PlayerContext = React.createContext<undefined | HTMLVideoElement>(u
 
 export default function Player(props: PlayerProps) {
   const contextMenuRef = React.useRef<ContextMenuRefMethods>()
-  const playerRef = React.useRef()
-  const [playerComponent, setPlayerComponent] = React.useState()
+  const playerRef = React.useRef<HTMLVideoElement>(null)
+  const [playerComponent, setPlayerComponent] = React.useState<HTMLVideoElement>()
 
   React.useEffect(() => {
     Yup.object(propsSchema).validateSync(props)
   }, [props])
 
-  React.useEffect(() => setPlayerComponent(playerRef.current), [playerRef])
+  React.useEffect(() => {
+    if(playerRef?.current) 
+      setPlayerComponent(playerRef.current)
+  }, [playerRef])
 
   return (
     <ReduxProvider store={store}>

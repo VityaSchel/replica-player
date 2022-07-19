@@ -1,0 +1,49 @@
+@import './animations.module.scss';
+
+.playPause {
+  fill: currentColor;
+
+  &.play {
+    animation-name: iconAnimation__play;
+    animation-direction: normal;
+    @include animatedIcon;
+  }
+
+  &.pause {
+    animation-name: iconAnimation__pause;
+    @include animatedIcon;
+  }
+}
+
+.clipPath {
+  transform: translate(0px, 0px);
+  transition: transform 300ms linear;
+  will-change: transform;
+
+  &.muted {
+    transform: translate(20px, 20px);
+  }
+}
+
+.volume {
+  
+  &.from2to1 {
+    animation-name: iconAnimation__volume2to1;
+    @include animatedIcon;
+  }
+  
+  &.from1to2 {
+    animation-name: iconAnimation__volume1to2;
+    @include animatedIcon;
+  }
+  
+  &.from1toMute {
+    animation-name: iconAnimation__volume1toMute;
+    @include animatedIcon;
+  }
+  
+  &.fromMuteTo1 {
+    animation-name: iconAnimation__volumeMuteTo1;
+    @include animatedIcon;
+  }
+}
