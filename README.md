@@ -86,3 +86,37 @@ Props with types ending with `?` are optional.
 #### Ref API reference
 
 [Todo]
+
+## Legal notice
+
+YouTube player's code is minified and copyrighted to YouTube, but the player itself is not patented/copyrighted. You can patent a technology feature (such as splitting videos in chunks, optimisation, which this player doesn't do), brand's logos, but you can't patent/copyright the web component, it's impossible :) Otherwise, everything in the web would be much more complicated. 
+
+Source code of this player is written by me, Viktor Shcheclochkov @hloth \<legal@hloth.dev\>, as seen from commits history, and, as stated in LICENSE.md and below, I give anyone with copy of this component a permission to use it in any context as you wish: you can embed ads in it and sell products using this component without need to credit me (but I would appreciate you credit me tho).
+
+## License
+
+> MIT License
+> 
+> Copyright (c) 2022 Viktor Shchelochkov
+> 
+> Permission is hereby granted, free of charge, to any person obtaining a copy
+> of this software and associated documentation files (the "Software"), to deal
+> in the Software without restriction, including without limitation the rights
+> to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+> copies of the Software, and to permit persons to whom the Software is
+> furnished to do so, subject to the following conditions:
+> 
+> The above copyright notice and this permission notice shall be included in all
+> copies or substantial portions of the Software.
+> 
+> THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+> IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+> FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+> AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+> LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+> OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+> SOFTWARE.
+
+## Funding
+
+Donate: [hloth.dev/donate](https://hloth.dev/donate)
