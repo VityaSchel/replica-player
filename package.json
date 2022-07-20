@@ -62,6 +62,7 @@
     "i18next-browser-languagedetector": "^6.1.4",
     "react-hotkeys-hook": "^3.4.6",
     "react-i18next": "^11.18.1",
+    "react-merge-refs": "^2.0.1",
     "react-popper": "^2.3.0",
     "react-redux": "^8.0.2",
     "yup": "^0.32.11"

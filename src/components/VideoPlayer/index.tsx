@@ -4,19 +4,21 @@ import type { PlayerProps } from '../player'
 import cx from 'classnames'
 // import { useAppDispatch } from '/store/hooks'
 import * as events from './events'
+// import { mergeRefs } from 'react-merge-refs'
 
-const VideoPlayer = React.forwardRef((props: PlayerProps, ref) => {
-  // const videoRef = ref as React.RefObject<HTMLVideoElement>
-  // const dispatch = useAppDispatch()
+const VideoPlayer = React.forwardRef((props: PlayerProps, externalRef) => {
+  // const internalRef = React.useRef()
+  // // const dispatch = useAppDispatch()
 
   // React.useEffect(() => {
-  //   if(!videoRef.current) return
+  //   if (!internalRef.current) return
 
-  //   const {
-  //     onVolumeChange
-  //   } = init(dispatch)
-  //   videoRef.current.addEventListener('volumechange', onVolumeChange)
-  // }, [videoRef])
+  //   // const {
+  //   //   onVolumeChange
+  //   // } = init(dispatch)
+  //   // videoRef.current.addEventListener('volumechange', onVolumeChange)
+  //   Object.defineProperty(internalRef.current, 'loop', { set: events._onLoopPropertyChange })
+  // }, [internalRef])
 
   return (
     <video 
@@ -26,9 +28,10 @@ const VideoPlayer = React.forwardRef((props: PlayerProps, ref) => {
         [styles.aspectRatioModeResize]: props.resizeMode === 'fill',
       })}
 
-      {...events}
-
-      ref={ref as React.LegacyRef<HTMLVideoElement>}
+      {...Object.fromEntries(Object.entries(events).filter(([key]) => !key.startsWith('_')))}
+      
+      // ref={mergeRefs([externalRef, internalRef]) as React.LegacyRef<HTMLVideoElement>}
+      ref={externalRef as React.LegacyRef<HTMLVideoElement>}
     >
       <source src={props.src} />
     </video>

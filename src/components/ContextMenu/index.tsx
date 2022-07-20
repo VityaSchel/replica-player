@@ -57,7 +57,6 @@ const ContextMenu = React.forwardRef((props, ref) => {
   })
   const playerContext = React.useContext(PlayerContext)
   const playbackState = useAppSelector(selectPlayback)
-  const dispatch = useAppDispatch()
   useHotkeys('esc', () => visible && setVisible(false), {}, [visible, setVisible])
 
   const methods: ContextMenuRefMethods = {
@@ -84,7 +83,6 @@ const ContextMenu = React.forwardRef((props, ref) => {
     switch(itemID) {
       case 'loop':
         playerContext.loop = !playbackState.loop
-        dispatch(setIsLooped(!playbackState.loop))
         break
 
       case 'copy_video_url':
