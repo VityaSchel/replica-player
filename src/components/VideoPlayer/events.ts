@@ -1,14 +1,18 @@
 import { store } from '/store'
-import { setMuted, setVolume } from '/store/slices/playback'
+import { setMuted, setPlaybackState, setVolume } from '/store/slices/playback'
 
-type Event = React.SyntheticEvent<HTMLVideoElement, Event>
+type SEvent = React.SyntheticEvent<HTMLVideoElement, Event>
 
-export function onVolumeChange(event: Event) {
+export function onVolumeChange(event: SEvent) {
   const player = event.currentTarget
   store.dispatch(setMuted(player.muted))
   store.dispatch(setVolume(player.volume))
 }
 
-export function _onLoopPropertyChange(event: Event) {
-  console.log('onBlur', event)
+export function onPlay(event: SEvent) {
+  store.dispatch(setPlaybackState('playing'))
+}
+
+export function onPause(event: SEvent) {
+  store.dispatch(setPlaybackState('paused'))
 }

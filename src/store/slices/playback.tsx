@@ -2,8 +2,10 @@ import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { RootState } from '/store'
 
+// Lazy means property may have outdated state
 export interface PlaybackState {
   state: 'loading' | 'playing' | 'paused'
+  /** Lazy */
   loop: boolean
   speed: number
   volume: number
