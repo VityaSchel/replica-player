@@ -67,9 +67,8 @@
       display: flex;
     }
 
-    .playControlButton {
-      width: 46px;
-
+    .controlsButton:not(.hide):nth-child(1),
+    .controlsButton.hide:nth-child(1) + .playControlButton {
       &::before {
         content: '';
         width: $margin;
@@ -77,6 +76,10 @@
         height: 100%;
         right: 100%;
       }
+    }
+
+    .playControlButton {
+      width: 46px;
     }
 
     .volumeControls {
