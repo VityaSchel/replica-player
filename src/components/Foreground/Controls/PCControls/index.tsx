@@ -3,6 +3,7 @@ import { PlayerProps } from '/components/player'
 import PlayPause from './PlayPause'
 import { Backwards, Forwards } from './PlaylistButtons'
 import Volume from './Volume'
+import SeekBar from './SeekBar'
 
 export default function PCControls(props: PlayerProps) {
   return (
@@ -12,6 +13,7 @@ export default function PCControls(props: PlayerProps) {
         className={styles.controlsContainer}
         {...props.componentsProps?.controls}
       >
+        <SeekBar {...props} />
         <div className={styles.controls}>
           <div className={styles.left}>
             <Backwards />

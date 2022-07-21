@@ -38,8 +38,8 @@ export const playbackSlice = createSlice({
     },
     setMuted: (state, action: PayloadAction<boolean>) => {
       state.muted = action.payload
-    },
-  },
+    }
+  }
 })
 
 export const { setPlaybackState, setIsLooped, setSpeed, setVolume, setMuted } = playbackSlice.actions
