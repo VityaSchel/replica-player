@@ -85,8 +85,11 @@ export default function ProgressBars(props: PlayerProps) {
   }
 
   return (
-    <div className={styles.progressBar} style={{ clipPath }}>
-
+    <div 
+      className={styles.progressBar} 
+      style={{ clipPath }}
+    >
+      <div className={styles.selection} />
     </div>
   )
 }
