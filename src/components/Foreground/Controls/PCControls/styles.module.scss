@@ -69,6 +69,14 @@
 
     .playControlButton {
       width: 46px;
+
+      &::before {
+        content: '';
+        width: $margin;
+        position: absolute;
+        height: 100%;
+        right: 100%;
+      }
     }
 
     .volumeControls {

@@ -72,7 +72,6 @@ const Volume = React.forwardRef((props, ref) => {
         className={styles.controlsButton} 
         onClick={handleClick}
         onMouseEnter={() => setActive(true)}
-        // onMouseLeave={() => setActive(false)}
       >
         <VolumeIcon
           volume={volume}
@@ -84,7 +83,6 @@ const Volume = React.forwardRef((props, ref) => {
       <div 
         className={cx(styles.volumeControls, { [styles.active]: active })}
         onMouseEnter={() => setActive(true)}
-        // onMouseLeave={() => setActive(false)}
         onMouseDown={handleDragStart}
         ref={sliderRef as React.LegacyRef<HTMLDivElement>}
         draggable='false'
