@@ -69,8 +69,11 @@
     }
 
     .volumeControls {
-      width: 0;
+      width: 0px;
       transition: width .2s cubic-bezier(0.4, 0, 1, 1);
+      cursor: pointer;
+      overflow: hidden;
+      height: 48px;
 
       &, & * {
         user-drag: none;
@@ -79,34 +82,36 @@
         -moz-user-select: none;
         -webkit-user-select: none;
         -ms-user-select: none;
-      }
-      
-      &.active {
-        width: 52px;
         display: flex;
         align-items: center;
+      }
 
-        .volumeBar {
-          width: 100%;
-          background: rgba(255, 255, 255, .2);
-          position: relative;
-          height: 3px;
-          
-          .volume {
-            background-color: #fff;
-            height: 100%;
-          }
+      $barWidth: 52px;
+      
+      &.active {
+        width: $barWidth;
+      }
 
-          .tip {
-            position: absolute;
-            $size: 12px;
-            width: $size;
-            height: $size;
-            border-radius: 50%;
-            background: #fff;
-            top: 50%;
-            transform: translateY(-50%);
-          }
+      .volumeBar {
+        min-width: $barWidth;
+        background: rgba(255, 255, 255, .2);
+        position: relative;
+        height: 3px;
+        
+        .volume {
+          background-color: #fff;
+          height: 100%;
+        }
+
+        .tip {
+          position: absolute;
+          $size: 12px;
+          width: $size;
+          height: $size;
+          border-radius: 50%;
+          background: #fff;
+          top: 50%;
+          transform: translateY(-50%);
         }
       }
     }

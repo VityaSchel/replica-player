@@ -16,7 +16,8 @@ export default function Volume() {
   const volume = isMuted ? 0 : volumeState
   const player = React.useContext(PlayerContext)
   const [active, setActive] = React.useState(true)
-  const [dragging, setDragging] = React.useState(false)
+  const [dragging, setDragging] = React.useState<{ active: boolean, relativePos: number }>({ active: false, relativePos: 0 })
+  const ref = React.useRef<HTMLDivElement>(null)
 
   const handleClick = () => {
     if (player) player.muted = !isMuted
@@ -31,21 +32,33 @@ export default function Volume() {
   }
 
   const handleDragEnd = () => {
-    setDragging(false)
+    setDragging({ active: false, relativePos: 0 })
     window.removeEventListener('mouseup', handleDragEnd)
     window.removeEventListener('mousemove', handleMouseMove)
     console.log('asdad')
   }
 
   const handleDragStart = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    setDragging(true)
-    handleMouseMove(e)
-    window.addEventListener('mouseup', handleDragEnd)
-    window.addEventListener('mousemove', handleMouseMove)
+    if (!ref.current) return
+
+    const relativePos = ref.current.getBoundingClientRect().left + window.scrollX
+    setDragging({ active: true, relativePos })
+    handleMouseMove(e, relativePos)
   }
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent> | MouseEvent) => {
-    // console.log(e)
+  React.useEffect(() => {
+    if (!dragging.active) return
+
+    window.addEventListener('mousemove', handleMouseMove)
+    window.addEventListener('mouseup', handleDragEnd)
+  }, [dragging])
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent> | MouseEvent, relativePos: number = dragging.relativePos) => {
+    if (!ref.current || !player) return
+
+    const newValue = Math.max(Math.min(barWidth, e.pageX - relativePos), 0) / barWidth
+    if (player.muted && newValue > 0) player.muted = false
+    player.volume = newValue
   }
 
   return (
@@ -53,8 +66,8 @@ export default function Volume() {
       <button 
         className={styles.controlsButton} 
         onClick={handleClick}
-        // onMouseEnter={() => setActive(true)}
-        // onMouseLeave={() => setActive(false)}
+        onMouseEnter={() => setActive(true)}
+        onMouseLeave={() => setActive(false)}
       >
         <VolumeIcon
           volume={volume}
@@ -65,10 +78,10 @@ export default function Volume() {
       </button>
       <div 
         className={cx(styles.volumeControls, { [styles.active]: active })}
-        // onMouseOut={() => setActive(false)}
+        onMouseEnter={() => setActive(true)}
+        onMouseLeave={() => setActive(false)}
         onMouseDown={handleDragStart}
-        // onMouseMove={e => dragging && console.log(e)}
-        // onMouseUp={handleDragEnd}
+        ref={ref as React.LegacyRef<HTMLDivElement>}
         draggable='false'
       >
         <div className={styles.volumeBar} draggable='false'>
