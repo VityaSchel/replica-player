@@ -20,6 +20,8 @@ Run `npm run build` which bundles /src folder with Rollup. You can edit src/roll
 
 Without NODE_ENV=development code will be minified and sourcemaps removed which increases build time (poor for realtime --watch mode) and makes it harder to debug.
 
+We're using Terser which reduces code size up to 2x and PostCSS minimize option. 
+
 ## Directories
 
 /src is where the project lives. It must be compiled into /dist and then distributed. All files and components must be in /src except for tools that used for building/linting and special files.
