@@ -5,8 +5,15 @@
   top: 0;
   left: 0;
 
-  &:hover .segments .segment {
-    height: 5px;
+  &:hover {
+
+    .segments .segment {
+      height: 5px;
+
+      .progressBar.selection {
+        opacity: 1;
+      }
+    }
   }
 
   & > * {
@@ -31,19 +38,17 @@
       &:hover {
         height: 9px;
       }
-    }
-  }
-
-  .progressBar {
-    pointer-events: none;
-
-    & > * {
-      height: 100%;
-    }
-
-    .selection {
-      background: rgba(255, 255, 255, .5);
-      width: 150px;
+    
+      .progressBar {
+        pointer-events: none;
+        height: 100%;
+    
+        &.selection {
+          background: rgba(255, 255, 255, .5);
+          opacity: 0;
+          transition: opacity .25s cubic-bezier(0, 0, 0.2, 1);
+        }
+      }
     }
   }
 }
