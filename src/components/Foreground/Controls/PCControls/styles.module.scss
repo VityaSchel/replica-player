@@ -77,6 +77,7 @@
       cursor: pointer;
       overflow: hidden;
       height: 48px;
+      margin-right: 2px;
 
       &, & * {
         user-drag: none;
@@ -115,6 +116,24 @@
           background: #fff;
           top: 50%;
           transform: translateY(-50%);
+        }
+      }
+    }
+
+    .timer {
+      display: flex;
+      padding: 0 5px;
+      align-items: center;
+
+      .timerValue {
+        display: flex;
+        align-items: center;
+        gap: 4.235px;
+
+        span {
+          text-shadow: 0 0 2px rgb(0 0 0 / 50%);
+          font-size: 13px;
+          white-space: nowrap;
         }
       }
     }

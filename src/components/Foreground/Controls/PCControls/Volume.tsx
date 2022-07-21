@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useImperativeHandle } from 'react'
 import styles from './styles.module.scss'
 import { useAppSelector } from '/store/hooks'
 import { selectPlaybackIsMuted, selectPlaybackVolume } from '/store/slices/playback'
@@ -10,14 +10,14 @@ const barWidth = 52
 const tipWidth = 12
 const tipMargin = 0
 
-export default function Volume() {
+const Volume = React.forwardRef((props, ref) => {
   const volumeState = useAppSelector(selectPlaybackVolume)
   const isMuted = useAppSelector(selectPlaybackIsMuted)
   const volume = isMuted ? 0 : volumeState
   const player = React.useContext(PlayerContext)
-  const [active, setActive] = React.useState(true)
+  const [active, setActive] = React.useState(false)
   const [dragging, setDragging] = React.useState<{ active: boolean, relativePos: number }>({ active: false, relativePos: 0 })
-  const ref = React.useRef<HTMLDivElement>(null)
+  const sliderRef = React.useRef<HTMLDivElement>(null)
 
   const handleClick = () => {
     if (player) player.muted = !isMuted
@@ -35,13 +35,12 @@ export default function Volume() {
     setDragging({ active: false, relativePos: 0 })
     window.removeEventListener('mouseup', handleDragEnd)
     window.removeEventListener('mousemove', handleMouseMove)
-    console.log('asdad')
   }
 
   const handleDragStart = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-    if (!ref.current) return
+    if (!sliderRef.current) return
 
-    const relativePos = ref.current.getBoundingClientRect().left + window.scrollX
+    const relativePos = sliderRef.current.getBoundingClientRect().left + window.scrollX
     setDragging({ active: true, relativePos })
     handleMouseMove(e, relativePos)
   }
@@ -54,12 +53,18 @@ export default function Volume() {
   }, [dragging])
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent> | MouseEvent, relativePos: number = dragging.relativePos) => {
-    if (!ref.current || !player) return
+    if (!sliderRef.current || !player) return
 
     const newValue = Math.max(Math.min(barWidth, e.pageX - relativePos), 0) / barWidth
     if (player.muted && newValue > 0) player.muted = false
     player.volume = newValue
   }
+
+  React.useImperativeHandle(ref, () => ({
+    unhover() {
+      setActive(false)
+    }
+  }))
 
   return (
     <>
@@ -67,7 +72,7 @@ export default function Volume() {
         className={styles.controlsButton} 
         onClick={handleClick}
         onMouseEnter={() => setActive(true)}
-        onMouseLeave={() => setActive(false)}
+        // onMouseLeave={() => setActive(false)}
       >
         <VolumeIcon
           volume={volume}
@@ -79,9 +84,9 @@ export default function Volume() {
       <div 
         className={cx(styles.volumeControls, { [styles.active]: active })}
         onMouseEnter={() => setActive(true)}
-        onMouseLeave={() => setActive(false)}
+        // onMouseLeave={() => setActive(false)}
         onMouseDown={handleDragStart}
-        ref={ref as React.LegacyRef<HTMLDivElement>}
+        ref={sliderRef as React.LegacyRef<HTMLDivElement>}
         draggable='false'
       >
         <div className={styles.volumeBar} draggable='false'>
@@ -99,4 +104,6 @@ export default function Volume() {
       </div>
     </>
   )
-}
+})
+Volume.displayName = 'Volume'
+export default Volume
