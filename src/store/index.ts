@@ -2,12 +2,14 @@ import { configureStore } from '@reduxjs/toolkit'
 import playbackReducer from './slices/playback'
 import playlistReducer from './slices/playlist'
 import playsourceReducer from './slices/playsource'
+import subtitlesReducer from './slices/subtitles'
 
 export const store = configureStore({
   reducer: {
     playback: playbackReducer,
     playlist: playlistReducer,
     playsource: playsourceReducer,
+    subtitles: subtitlesReducer,
   },
 })
 
