@@ -10,22 +10,34 @@ import ContextMenu, { ContextMenuRefMethods } from './ContextMenu'
 import { Provider as ReduxProvider } from 'react-redux'
 import NoSsr from '@mui/base/NoSsr'
 import { store } from '/store'
-
-export interface PlayerProps {
-  src: string
-  width?: number
-  height?: number
-  resizeMode?: 'fit' | 'cover' | 'fill'
-  componentsProps?: {
-    container?: { [key: string]: any }
-    controls?: { [key: string]: any }
-  }
-}
+import type { PlayerProps } from '/types/props'
+export { PlayerProps }
 
 const propsSchema = {
   src: Yup.string()
     .url()
-    .required()
+    .required(),
+  width: Yup.number(),
+  height: Yup.number(),
+  resizeMode: Yup.string()
+    .oneOf(['fit', 'cover', 'fill']),
+  segments: Yup.array()
+    .of(
+      Yup.object()
+        .shape({
+          timeStart: Yup.number()
+            .integer()
+            .min(0)
+            .required(),
+          title: Yup.string()
+            .required()
+        })
+    ),
+  componentsProps: Yup.object()
+    .shape({
+      container: Yup.object(),
+      controls: Yup.object(),
+    })
 } as const
 
 export const PlayerContext = React.createContext<undefined | HTMLVideoElement>(undefined)

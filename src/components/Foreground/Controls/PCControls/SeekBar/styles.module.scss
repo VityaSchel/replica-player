@@ -1,0 +1,54 @@
+.seekBarContainer {
+  width: 100%;
+  height: 3px;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  &:hover {
+
+    .segments .segment {
+      height: 5px;
+
+      .progressBar.selection {
+        opacity: 1;
+      }
+    }
+  }
+
+  & > * {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .segments {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    
+    .segment {
+      height: 100%;
+      background: rgba(255,255,255,.2);
+      transition: height 0.1s cubic-bezier(0, 0, 0.2, 1) 0s;
+
+      &:hover {
+        height: 9px;
+      }
+    
+      .progressBar {
+        pointer-events: none;
+        height: 100%;
+    
+        &.selection {
+          background: rgba(255, 255, 255, .5);
+          opacity: 0;
+          transition: opacity .25s cubic-bezier(0, 0, 0.2, 1);
+        }
+      }
+    }
+  }
+}

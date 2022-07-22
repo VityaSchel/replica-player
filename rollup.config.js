@@ -7,6 +7,7 @@ import postcss from 'rollup-plugin-postcss'
 import rootImport from 'rollup-plugin-root-import'
 import json from '@rollup/plugin-json'
 import svgr from '@svgr/rollup'
+import { terser } from 'rollup-plugin-terser'
 
 import postcssAutoprefixer from 'autoprefixer'
 
@@ -24,7 +25,10 @@ export default [
     plugins: [
       external(),
       svgr(),
-      typescript({ tsconfig: './tsconfig.json' }),
+      typescript({ 
+        tsconfig: './tsconfig.json',
+        sourceMap: process.env.NODE_ENV === 'development'
+      }),
       rootImport({
         root: `${__dirname}/src`,
         useInput: 'prepend',
@@ -39,11 +43,13 @@ export default [
         },
         autoModules: false,
         use: ['sass'],
+        minimize: process.env.NODE_ENV !== 'development',
         plugins: [postcssAutoprefixer]
       }),
       json(),
       resolve(),      
       commonjs(),
+      process.env.NODE_ENV !== 'development' && terser()
     ]
   },
   {

@@ -43,7 +43,7 @@ Tested with
 - create-react-app@5.0.1
 - Next.js@12.2.2
 
-### Use with React
+## Use with React
 
 Developed with React 18.2.0
 
@@ -67,23 +67,35 @@ export default function YourApp() {
 }
 ```
 
-### API Reference
+## API Reference
 
-#### Props
+### Props
 
 Props with types ending with `?` are optional.
 
-| Prop                      | Type    | Default   | Description                                                    |
-| ------------------------- | ------- | :-------- | -------------------------------------------------------------- |
-| src                       | string  | undefined | Media source                                                   |
-| width                     | number? | 640       | Width of player's container. Can be overriden with css styles  |
-| height                    | number? | 360       | Height of player's container. Can be overriden with css styles |
-| resizeMode                | string? | 'fit'     | One of 'fit', 'cover' and 'fill'                               |
-| componentsProps           | object? | undefined | Rest props for any components inside player                    |
-| componentsProps.container | object? | undefined | Props for player's container div                               |
-| componentsProps.controls  | object? | undefined | Props for player's controls                                    |
+| Prop                      | Type                   | Default   | Description                                                    |
+| ------------------------- | ---------------------- | :-------- | -------------------------------------------------------------- |
+| src                       | string                 | undefined | Media source                                                   |
+| width                     | number?                | 640       | Width of player's container. Can be overriden with css styles  |
+| height                    | number?                | 360       | Height of player's container. Can be overriden with css styles |
+| resizeMode                | string?                | 'fit'     | One of 'fit', 'cover' and 'fill'                               |
+| segments                  | [Segment](#segment)?[] | []        | Array of video segments                                        |
+| componentsProps           | object?                | undefined | Rest props for any components inside player                    |
+| componentsProps.container | object?                | undefined | Props for player's container div                               |
+| componentsProps.controls  | object?                | undefined | Props for player's controls                                    |
 
-#### Ref API reference
+### Interfaces
+
+#### Segment
+
+Video segment
+
+| Prop      | Type   | Default   | Description                                         |
+| --------- | ------ | :-------- | --------------------------------------------------- |
+| timeStart | number | undefined | Seconds from start of the video when segment starts |
+| title     | string | ""        | Title of segment                                    |
+
+### Ref API reference
 
 [Todo]
 

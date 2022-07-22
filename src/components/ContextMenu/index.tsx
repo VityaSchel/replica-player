@@ -51,13 +51,13 @@ const ContextMenu = React.forwardRef((props, ref) => {
   const [visible, setVisible] = React.useState(false)
   const [blurring, setBlurring] = React.useState(false)
   const { t } = useTranslation()
+  const dispatch = useAppDispatch()
   const menuRef = React.useRef<HTMLDivElement>(null)
   const popper = usePopper(virtualReference, menuRef.current, {
     placement: 'right-start',
   })
   const playerContext = React.useContext(PlayerContext)
   const playbackState = useAppSelector(selectPlayback)
-  const dispatch = useAppDispatch()
   useHotkeys('esc', () => visible && setVisible(false), {}, [visible, setVisible])
 
   const methods: ContextMenuRefMethods = {
@@ -68,6 +68,7 @@ const ContextMenu = React.forwardRef((props, ref) => {
         popper.update?.()
         setVisible(true)
         menuRef.current?.focus()
+        updateMenu()
         return false
       } else {
         setVisible(false)
@@ -77,6 +78,12 @@ const ContextMenu = React.forwardRef((props, ref) => {
 
   React.useImperativeHandle(ref, () => methods)
 
+  const updateMenu = () => {
+    if (!playerContext) return
+
+    dispatch(setIsLooped(playerContext.loop))
+  }
+
   const handleSelectItem = (itemID: MenuItemID) => () => {
     if(!playerContext) return
     setVisible(false)
@@ -84,7 +91,6 @@ const ContextMenu = React.forwardRef((props, ref) => {
     switch(itemID) {
       case 'loop':
         playerContext.loop = !playbackState.loop
-        dispatch(setIsLooped(!playbackState.loop))
         break
 
       case 'copy_video_url':

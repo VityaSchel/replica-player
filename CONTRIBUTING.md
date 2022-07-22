@@ -15,8 +15,12 @@ Run `npm run build` which bundles /src folder with Rollup. You can edit src/roll
   format: 'esm'
 },
 ```
-4. Run `npm run build`
+4. Run `NODE_ENV=development npm run build`
 5. Now you should see dist and dist-esm directories in the project
+
+Without NODE_ENV=development code will be minified and sourcemaps removed which increases build time (poor for realtime --watch mode) and makes it harder to debug.
+
+We're using Terser which reduces code size up to 2x and PostCSS minimize option. 
 
 ## Directories
 
