@@ -1,12 +1,13 @@
 {
   "name": "replica-player-demo",
-  "private": true,
+  "private": false,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
+    "build": "tsc && vite build --base=\"./\"",
+    "preview": "vite preview",
+    "deploy": "git subtree push --prefix dist origin gh-pages"
   },
   "dependencies": {
     "@tippyjs/react": "^4.2.6",
@@ -14,7 +15,7 @@
     "copy-to-clipboard": "^3.3.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "replica-player": "^0.0.7",
+    "replica-player": "file:../../Downloads/replica-player-0.0.9.tgz",
     "sass": "^1.54.0",
     "tippy.js": "^6.3.7"
   },
