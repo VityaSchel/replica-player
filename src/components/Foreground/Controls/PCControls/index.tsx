@@ -8,6 +8,7 @@ import SeekBar from './SeekBar'
 import Timer from './Timer'
 import Autoplay from './Autoplay'
 import Subtitles from './Subtitles'
+import Settings from './Settings'
 
 export default function PCControls(props: PlayerProps) {
   const volumeRef = React.useRef<{ unhover: () => void }>()
@@ -34,6 +35,7 @@ export default function PCControls(props: PlayerProps) {
           <div className={styles.right}>
             <Autoplay />
             <Subtitles />
+            <Settings />
           </div>
         </div>
       </div>

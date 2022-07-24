@@ -26,7 +26,6 @@
 }
 
 .volume {
-  
   &.from2to1 {
     animation-name: iconAnimation__volume2to1;
     @include animatedIcon;
@@ -45,5 +44,14 @@
   &.fromMuteTo1 {
     animation-name: iconAnimation__volumeMuteTo1;
     @include animatedIcon;
+  }
+}
+
+.settings {
+  transition: transform .1s cubic-bezier(0.4, 0, 1, 1);
+  transform: rotateZ(0deg);
+
+  &.active {
+    transform: rotateZ(30deg);
   }
 }
