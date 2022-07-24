@@ -9,9 +9,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@tippyjs/react": "^4.2.6",
+    "classnames": "^2.3.1",
+    "copy-to-clipboard": "^3.3.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "sass": "^1.54.0"
+    "sass": "^1.54.0",
+    "tippy.js": "^6.3.7"
   },
   "devDependencies": {
     "@types/react": "^18.0.15",
