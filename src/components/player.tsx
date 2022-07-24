@@ -15,7 +15,8 @@ export { PlayerProps }
 
 const propsSchema = {
   src: Yup.string()
-    .url()
+    // .url()
+    .string()
     .required(),
   width: Yup.number(),
   height: Yup.number(),
