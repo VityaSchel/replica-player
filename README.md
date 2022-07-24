@@ -1,5 +1,7 @@
 # Replica Player
 
+![Minzipped size](https://badgen.net/bundlephobia/minzip/replica-player) ![License](https://badgen.net/npm/license/replica-player?color=orange)
+
 Video-player for React that is identical to YouTube's in-app player. YouTube video-player clone.
 
 [Todo: add comparison of original player and Replica Player]

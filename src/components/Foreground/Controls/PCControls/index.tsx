@@ -6,7 +6,8 @@ import { Backwards, Forwards } from './PlaylistButtons'
 import Volume from './Volume'
 import SeekBar from './SeekBar'
 import Timer from './Timer'
-import Autoplay from '/components/Foreground/Controls/PCControls/Autoplay'
+import Autoplay from './Autoplay'
+import Subtitles from './Subtitles'
 
 export default function PCControls(props: PlayerProps) {
   const volumeRef = React.useRef<{ unhover: () => void }>()
@@ -32,6 +33,7 @@ export default function PCControls(props: PlayerProps) {
           </div>
           <div className={styles.right}>
             <Autoplay />
+            <Subtitles />
           </div>
         </div>
       </div>
