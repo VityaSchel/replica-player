@@ -25,6 +25,7 @@ YouTube player is probably the best universal video-player ever created, I have 
   - [ ] Episodes
   - [ ] Aspect-ratio view modes: fit, cover, resize (mobile only)
   - [ ] Localization
+  - [ ] Chrome case (using [Presentation API](https://developer.mozilla.org/en-US/docs/Web/API/Presentation_API))
 - React v18 supported. Vue, Angular and Vanilla JS support may be added in future.
 - TypeScript supported
 - MIT licensed, not patented by Google LLC

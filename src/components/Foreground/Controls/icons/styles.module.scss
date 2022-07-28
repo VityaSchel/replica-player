@@ -55,3 +55,61 @@
     transform: rotateZ(30deg);
   }
 }
+
+.fullscreen {
+  $distace: 1px;
+
+  path {
+    fill: #fff;
+  }
+
+  .corner0,
+  .corner1,
+  .corner2,
+  .corner3 {
+    transform: translate(0px, 0px);
+    // transition: transform .4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  &:hover {
+    .corner0 {
+      animation: corner0-animation .4s cubic-bezier(0.4, 0, 0.2, 1);
+
+      @keyframes corner0-animation {
+        50% {
+          transform: translate(-$distace, -$distace);
+        }
+      }
+    }
+
+    .corner1 {
+      animation: corner1-animation .4s cubic-bezier(0.4, 0, 0.2, 1);
+
+      @keyframes corner1-animation {
+        50% {
+          transform: translate($distace, -$distace);
+        }
+      }
+    }
+
+    .corner2 {
+      animation: corner2-animation .4s cubic-bezier(0.4, 0, 0.2, 1);
+
+      @keyframes corner2-animation {
+        50% {
+          transform: translate($distace, $distace);
+        }
+      }
+    }
+
+    .corner3 {
+      animation: corner3-animation .4s cubic-bezier(0.4, 0, 0.2, 1);
+
+      @keyframes corner3-animation {
+        50% {
+          transform: translate(-$distace, $distace);
+        }
+      }
+    }
+  }
+}

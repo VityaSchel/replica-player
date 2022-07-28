@@ -2,7 +2,7 @@ import React from 'react'
 import styles from '../../styles.module.scss'
 import type { PlayerProps } from '../player'
 import cx from 'classnames'
-import * as events from './events'
+import * as events from '/events/videoPlayer'
 
 const VideoPlayer = React.forwardRef((props: PlayerProps, externalRef) => {
   return (

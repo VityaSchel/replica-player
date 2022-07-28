@@ -3,7 +3,7 @@ import playbackReducer from './slices/playback'
 import playlistReducer from './slices/playlist'
 import playsourceReducer from './slices/playsource'
 import subtitlesReducer from './slices/subtitles'
-import settingsMenuReducer from './slices/settingsMenu'
+import uiReducer from './slices/ui'
 
 export const store = configureStore({
   reducer: {
@@ -11,7 +11,7 @@ export const store = configureStore({
     playlist: playlistReducer,
     playsource: playsourceReducer,
     subtitles: subtitlesReducer,
-    settingsMenu: settingsMenuReducer,
+    ui: uiReducer
   },
 })
 

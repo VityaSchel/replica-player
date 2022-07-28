@@ -1,29 +1,27 @@
-import { store } from '/store'
+import { store, mEvent } from './index'
 import { setMuted, setPlaybackState, setVolume, setCurrentTime } from '/store/slices/playback'
 import { setDuration } from '/store/slices/playsource'
 
-type SEvent = React.SyntheticEvent<HTMLVideoElement, Event>
-
-export function onVolumeChange(event: SEvent) {
+export function onVolumeChange(event: mEvent) {
   const player = event.currentTarget
   store.dispatch(setMuted(player.muted))
   store.dispatch(setVolume(player.volume))
 }
 
-export function onPlay(event: SEvent) {
+export function onPlay() {
   store.dispatch(setPlaybackState('playing'))
 }
 
-export function onPause(event: SEvent) {
+export function onPause() {
   store.dispatch(setPlaybackState('paused'))
 }
 
-export function onDurationChange(event: SEvent) {
+export function onDurationChange(event: mEvent) {
   const player = event.currentTarget
   store.dispatch(setDuration(player.duration))
 }
 
-export function onTimeUpdate(event: SEvent) {
+export function onTimeUpdate(event: mEvent) {
   const player = event.currentTarget
   store.dispatch(setCurrentTime(player.currentTime))
 }
