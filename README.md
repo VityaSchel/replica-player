@@ -16,15 +16,17 @@ YouTube player is probably the best universal video-player ever created, I have 
 
 - Works on native HTML5 video element, so any format, that your browser can play, can also be played in Replica Player
 - On mobile it's identical to YouTube's in-app player, on PC it's identical to YouTube's web player
-- Features supported:
+- Features supported ([roadmap](https://github.com/users/VityaSchel/projects/4/views/1)):
   - [ ] Fast-forwarding
   - [ ] Speed change
   - [ ] Quality versions
   - [ ] Subtitles
   - [ ] Hotkeys
   - [ ] Episodes
+  - [ ] Playlists
   - [ ] Aspect-ratio view modes: fit, cover, resize (mobile only)
   - [ ] Localization
+  - [ ] Chrome cast (using [Presentation API](https://developer.mozilla.org/en-US/docs/Web/API/Presentation_API))
 - React v18 supported. Vue, Angular and Vanilla JS support may be added in future.
 - TypeScript supported
 - MIT licensed, not patented by Google LLC

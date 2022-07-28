@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './styles.module.scss'
 import { useAppDispatch, useAppSelector } from '/store/hooks'
 import SettingsIcon from '../icons/Settings'
-import { selectSettingsMenuVisible, setSettingsMenuVisible } from '/store/slices/settingsMenu'
+import { selectSettingsMenuVisible, setSettingsMenuVisible } from '/store/slices/ui'
 
 export default function Settings() {
   const settingsMenuVisible = useAppSelector(selectSettingsMenuVisible)

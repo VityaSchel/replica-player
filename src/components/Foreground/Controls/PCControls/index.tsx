@@ -9,6 +9,7 @@ import Timer from './Timer'
 import Autoplay from './Autoplay'
 import Subtitles from './Subtitles'
 import Settings from './Settings'
+import Fullscreen from './Fullscreen'
 
 export default function PCControls(props: PlayerProps) {
   const volumeRef = React.useRef<{ unhover: () => void }>()
@@ -36,6 +37,7 @@ export default function PCControls(props: PlayerProps) {
             <Autoplay />
             <Subtitles />
             <Settings />
+            <Fullscreen />
           </div>
         </div>
       </div>
