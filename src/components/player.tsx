@@ -22,17 +22,22 @@ const propsSchema = {
       Yup.object()
         .shape({
           uri: Yup.string().required(),
-          quality: Yup.string().oneOf(VideoQualities).required(),
-          customQuality: Yup.object().when('quality', {
-            is: quality => quality === 'CUSTOM',
-            then: Yup.object()
-              .shape({
-                width: Yup.number().integer().required(),
-                height: Yup.number().integer().required(),
-                fps: Yup.number().integer().required(),
-              })
-              .required(),
-          })
+          quality: Yup.lazy(
+            quality => typeof quality === 'string'
+              ? (
+                Yup.string()
+                  .oneOf(VideoQualities)
+                  .required()
+              ) : (
+                Yup.object()
+                  .shape({
+                    width: Yup.number().integer().required(),
+                    height: Yup.number().integer().required(),
+                    fps: Yup.number().integer().required(),
+                  })
+                  .required()
+              )
+          )
         })
     )
     .required(),

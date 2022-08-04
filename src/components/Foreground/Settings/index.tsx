@@ -5,7 +5,10 @@ import { useTranslation } from 'react-i18next'
 import { useAppSelector } from '/store/hooks'
 import { selectPlaybackPlayerSpeed } from '/store/slices/playback'
 import { selectSubtitlesName } from '/store/slices/subtitles'
-import { selectPlaysourceVideoQuality } from '/store/slices/playsource'
+import { selectPlaysourceVideoQuality, VideoQuality } from '/store/slices/playsource'
+import SpeedIcon from './icons/speed.svg'
+import SubtitlesIcon from './icons/subtitles.svg'
+import QualityIcon from './icons/quality.svg'
 
 export type SettingsTabs = 'main' | 'quality' | 'speed' | 'subtitles'
 
@@ -52,6 +55,14 @@ function MenuItem(props: MenuItemProps) {
   )
 }
 
+const formatQuality = (quality: VideoQuality) => {
+  if(typeof quality === 'string') {
+    return quality
+  } else {
+    return `${quality.width}x${quality.height}p${quality.fps}`
+  }
+}
+
 function MainMenu() {
   const { t } = useTranslation()
   const playbackSpeed = useAppSelector(selectPlaybackPlayerSpeed)
@@ -61,17 +72,20 @@ function MainMenu() {
   return (
     <Menu>
       <MenuItem
+        icon={<SpeedIcon />}
         endAdornment={playbackSpeed === 1 ? t('player.settings.speed_menu.normal') : playbackSpeed}
       >
         {t('player.settings.speed_menu.title')}
       </MenuItem>
       <MenuItem
+        icon={<SubtitlesIcon />}
         endAdornment={subtitlesName ?? t('player.settings.subtitles_menu.disabled')}
       >
         {t('player.settings.subtitles_menu.title')}
       </MenuItem>
       <MenuItem
-        endAdornment={quality}
+        icon={<QualityIcon />}
+        endAdornment={quality && formatQuality(quality)}
       >
         {t('player.settings.quality_menu.title')}
       </MenuItem>
