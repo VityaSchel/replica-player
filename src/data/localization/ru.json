@@ -11,6 +11,19 @@
       "copy_debug_data": "Копировать данные для отладки",
       "playback_support": "Решить проблему с воспроизведением",
       "sysadmin_statistics": "Статистика для сисадминов"
+    },
+    "settings": {
+      "speed_menu": {
+        "title": "Скорость воспроизведения",
+        "normal": "Обычная"
+      },
+      "subtitles_menu": {
+        "title": "Субтитры",
+        "disabled": "Выкл."
+      },
+      "quality_menu": {
+        "title": "Качество"
+      }
     }
   }
 }
