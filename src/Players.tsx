@@ -16,7 +16,7 @@ export default function PlayersComparison() {
       <ReplicaPlayer
         width={560}
         height={315}
-        src='./me-at-the-zoo.mp4'
+        src={[{ uri: './me-at-the-zoo.mp4', quality: '720p' }]}
       />
     </div>
   )
