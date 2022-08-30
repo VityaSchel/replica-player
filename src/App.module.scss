@@ -1,5 +1,14 @@
 .app {
   display: flex;
   align-items: center;
-  gap: 250px;
+  flex-direction: column;
+  gap: 50px;
+
+  @media screen and (min-width: 1170px) {
+    flex-direction: row;
+    gap: 120px;
+  }
+  @media screen and (min-width: 1280px) {
+    gap: 250px;
+  }
 }
