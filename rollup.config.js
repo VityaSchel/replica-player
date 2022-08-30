@@ -26,15 +26,15 @@ export default [
     plugins: [
       external(),
       svgr(),
+      typescript({ 
+        tsconfig: './tsconfig.json',
+        sourceMap: process.env.NODE_ENV === 'development'
+      }),
       rootImport({
         root: `${__dirname}/src`,
         useInput: 'prepend',
 
         extensions: ['.tsx', '.ts', '.js'],
-      }),
-      typescript({ 
-        tsconfig: './tsconfig.json',
-        sourceMap: process.env.NODE_ENV === 'development'
       }),
       postcss({
         extract: 'index.css',
