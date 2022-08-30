@@ -17,16 +17,16 @@ YouTube player is probably the best universal video-player ever created, I have 
 - Works on native HTML5 video element, so any format, that your browser can play, can also be played in Replica Player
 - On mobile it's identical to YouTube's in-app player, on PC it's identical to YouTube's web player
 - Features supported ([roadmap](https://github.com/users/VityaSchel/projects/4/views/1)):
-  - [ ] Fast-forwarding
-  - [ ] Speed change
-  - [ ] Quality versions
-  - [ ] Subtitles
-  - [ ] Hotkeys
-  - [ ] Episodes
-  - [ ] Playlists
-  - [ ] Aspect-ratio view modes: fit, cover, resize (mobile only)
-  - [ ] Localization
-  - [ ] Chrome cast (using [Presentation API](https://developer.mozilla.org/en-US/docs/Web/API/Presentation_API))
+[ ] Fast-forwarding
+[x] Speed change
+[ ] Quality versions
+[ ] Subtitles
+[ ] Hotkeys
+[ ] Episodes
+[ ] Playlists
+[x] Aspect-ratio view modes: fit, cover, resize
+[ ] Localization
+[ ] Chrome cast (using [Presentation API](https://developer.mozilla.org/en-US/docs/Web/API/Presentation_API))
 - React v18 supported. Vue, Angular and Vanilla JS support may be added in future.
 - TypeScript supported
 - MIT licensed, not patented by Google LLC
@@ -64,7 +64,20 @@ export default function YourApp() {
 
   return (
     <ReplicaPlayer 
-      src={'https://www.w3schools.com/html/mov_bbb.mp4'}
+      src={[
+        {
+          uri: 'https://www.w3schools.com/html/mov_bbb.mp4',
+          quality: '720p'
+        },
+        {
+          uri: 'https://www.w3schools.com/html/mov_bbb.mp4',
+          quality: {
+            width: 1280,
+            height: 720,
+            fps: 30
+          }
+        }
+      ]}
       ref={ref}
     />
   )
@@ -77,16 +90,25 @@ export default function YourApp() {
 
 Props with types ending with `?` are optional.
 
-| Prop                      | Type                   | Default   | Description                                                    |
-| ------------------------- | ---------------------- | :-------- | -------------------------------------------------------------- |
-| src                       | string                 | undefined | Media source                                                   |
-| width                     | number?                | 640       | Width of player's container. Can be overriden with css styles  |
-| height                    | number?                | 360       | Height of player's container. Can be overriden with css styles |
-| resizeMode                | string?                | 'fit'     | One of 'fit', 'cover' and 'fill'                               |
-| segments                  | [Segment](#segment)?[] | []        | Array of video segments                                        |
-| componentsProps           | object?                | undefined | Rest props for any components inside player                    |
-| componentsProps.container | object?                | undefined | Props for player's container div                               |
-| componentsProps.controls  | object?                | undefined | Props for player's controls                                    |
+| Prop                      | Type                   | Default   | Description                                                         |
+| ------------------------- | ---------------------- | :-------- | ------------------------------------------------------------------- |
+| src                       | array of objects       | undefined | Media source. Array of either presets or custom quality. See below. |
+| width                     | number?                | 640       | Width of player's container. Can be overriden with css styles       |
+| height                    | number?                | 360       | Height of player's container. Can be overriden with css styles      |
+| resizeMode                | string?                | 'fit'     | One of 'fit', 'cover' and 'fill'                                    |
+| segments                  | [Segment](#segment)?[] | []        | Array of video segments                                             |
+| componentsProps           | object?                | undefined | Rest props for any components inside player                         |
+| componentsProps.container | object?                | undefined | Props for player's container div                                    |
+| componentsProps.controls  | object?                | undefined | Props for player's controls                                         |
+
+#### `src` props
+
+Sources are source files of the same video with different quality.
+
+src prop is always array of objects with `uri` and `quality` properties, where URI is a link to video file (may be anything that browser understands) and quality is either preset or object with custom quality.
+
+- Presets for qualities: `'144p' | '240p' | '360p' | '480p' | '720p' | '1080p' | '1440p' | '2160p' | '4320p'`
+- Custom quality: `{ width: number, height: number, fps: number }` (will be displayed as `{width}x{height}p{fps}`)
 
 ### Interfaces
 
