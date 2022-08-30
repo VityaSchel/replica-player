@@ -36,4 +36,17 @@
     width: 311px;
     height: 285px;
   }
+
+  .otherSpeed {
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    color: inherit;
+    font-family: inherit;
+    padding: 0 10px;
+    text-decoration: underline;
+    height: 100%;
+    cursor: pointer;
+    font-size: inherit;
+  }
 }

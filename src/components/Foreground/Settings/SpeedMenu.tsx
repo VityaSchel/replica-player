@@ -1,4 +1,5 @@
 import React from 'react'
+import styles from './styles.module.scss'
 import { useTranslation } from 'react-i18next'
 import { useAppSelector } from '/store/hooks'
 import { selectPlaybackPlayerSpeed } from '/store/slices/playback'
@@ -24,6 +25,9 @@ export default function SpeedMenu() {
       <MenuTitle 
         title={t('player.settings.speed_menu.title')} 
         onClick={() => {}}
+        endAdornment={
+          <button className={styles.otherSpeed}>{t('player.settings.speed_menu.other')}</button>
+        }
       />
       {[0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2].map(itemSpeedLabel => (
         <MenuItem

@@ -15,7 +15,8 @@
     "settings": {
       "speed_menu": {
         "title": "Скорость воспроизведения",
-        "normal": "Обычная"
+        "normal": "Обычная",
+        "other": "Другая"
       },
       "subtitles_menu": {
         "title": "Субтитры",
