@@ -19,8 +19,8 @@ const settingsContextDefaultValue = {
 export const SettingsContext = React.createContext<SettingsContextValue>(settingsContextDefaultValue)
 
 export default function Settings() {
-  const [settingsTab, setSettingsTab] = React.useState<SettingsTab>('other_speed')
-  const [visible, setVisible] = React.useState(true)
+  const [settingsTab, setSettingsTab] = React.useState<SettingsTab>('main')
+  const [visible, setVisible] = React.useState(false)
 
   return (
     <SettingsContext.Provider value={{ tab: settingsTab, setTab: setSettingsTab }}>
