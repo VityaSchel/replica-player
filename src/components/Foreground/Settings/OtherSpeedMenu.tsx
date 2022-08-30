@@ -1,6 +1,8 @@
 import React from 'react'
 import styles from './styles.module.scss'
 import { useTranslation } from 'react-i18next'
+import { useAppSelector } from '/store/hooks'
+import { selectPlaybackPlayerSpeed } from '/store/slices/playback'
 import Menu from './Menu'
 import MenuTitle from './Menu/title'
 import { PlayerContext } from '/components/player'
@@ -8,6 +10,7 @@ import { SettingsContext } from './index'
 
 export default function OtherSpeedMenu() {
   const { t } = useTranslation()
+  const playbackSpeed = useAppSelector(selectPlaybackPlayerSpeed)
   const player = React.useContext(PlayerContext)
   const [progress, setProgress] = React.useState(0)
   const settingsContext = React.useContext(SettingsContext)
@@ -17,6 +20,10 @@ export default function OtherSpeedMenu() {
 
     player.playbackRate = newSpeed
   }
+
+  React.useEffect(() => {
+    setProgress(playbackSpeed / 2)
+  }, [])
 
   return (
     <Menu>
@@ -38,8 +45,9 @@ export default function OtherSpeedMenu() {
           min={0.25}
           max={2}
           step={0.05}
+          value={playbackSpeed}
         />
-        <span className={styles.progress}>{progress*1.75 + 0.25}x</span>
+        <span className={styles.progress}>{playbackSpeed}x</span>
       </div>
     </Menu>
   )

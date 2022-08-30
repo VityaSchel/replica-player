@@ -27,7 +27,7 @@ export const uiSlice = createSlice({
 
 export const { setSettingsMenuVisible, setFullscreenMode } = uiSlice.actions
 
-export const selectSettingsMenu = (state: RootState) => state.ui
+export const selectUI = (state: RootState) => state.ui
 export const selectSettingsMenuVisible = (state: RootState) => state.ui.settingsMenuVisible
 export const selectFullscreenMode = (state: RootState) => state.ui.fullscreenMode
 

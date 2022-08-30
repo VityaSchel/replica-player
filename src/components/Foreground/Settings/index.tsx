@@ -4,6 +4,8 @@ import styles from './styles.module.scss'
 import MainMenu from './MainMenu'
 import SpeedMenu from './SpeedMenu'
 import OtherSpeedMenu from './OtherSpeedMenu'
+import { useAppSelector } from '/store/hooks'
+import { selectSettingsMenuVisible } from '/store/slices/ui'
 
 export type SettingsTab = 'main' | 'quality' | 'speed' | 'other_speed' | 'subtitles'
 
@@ -20,7 +22,11 @@ export const SettingsContext = React.createContext<SettingsContextValue>(setting
 
 export default function Settings() {
   const [settingsTab, setSettingsTab] = React.useState<SettingsTab>('main')
-  const [visible, setVisible] = React.useState(false)
+  const visible = useAppSelector(selectSettingsMenuVisible)
+
+  React.useEffect(() => {
+    if(!visible) setSettingsTab('main')
+  }, [visible])
 
   return (
     <SettingsContext.Provider value={{ tab: settingsTab, setTab: setSettingsTab }}>
