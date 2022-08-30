@@ -7,7 +7,7 @@ import SpeedMenu from './SpeedMenu'
 export type SettingsTabs = 'main' | 'quality' | 'speed' | 'subtitles'
 
 export default function Settings() {
-  const [settingsTab, setSettingsTab] = React.useState<SettingsTabs>('main')
+  const [settingsTab, setSettingsTab] = React.useState<SettingsTabs>('speed')
   const [visible, setVisible] = React.useState(true)
 
   return (
