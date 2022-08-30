@@ -36,47 +36,4 @@
     width: 311px;
     height: 285px;
   }
-
-  .menu {
-    padding: 8px 0;
-    display: flex;
-    flex-direction: column;
-
-    .menuItem {
-      height: 40px;
-      display: flex;
-      align-items: center;
-      background-color: transparent;
-      border: 0;
-      padding: 0;
-      color: #eee;
-      cursor: pointer;
-      
-      .icon {
-        width: 45px;
-      }
-
-      .children {
-        font-weight: 500;
-        flex: 1;
-        text-align: left;
-      }
-
-      .endAdornment {
-        font-size: 11.99px;
-
-        &.rightArrow {
-          background-repeat: no-repeat;
-          background-position: right 9px center;
-          background-size: 32px 32px;
-          padding-right: 38px;
-          background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIHZpZXdCb3g9IjAgMCAzMiAzMiIgdmVyc2lvbj0iMS4xIj48cGF0aCBkPSJtIDEyLjU5LDIwLjM0IDQuNTgsLTQuNTkgLTQuNTgsLTQuNTkgMS40MSwtMS40MSA2LDYgLTYsNiB6IiBmaWxsPSIjZmZmIiAvPjwvc3ZnPg==);
-        }
-      }
-
-      &:hover {
-        background-color: rgba(255, 255, 255, .1);
-      }
-    }
-  }
 }
