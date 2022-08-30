@@ -10,6 +10,7 @@ import svgr from '@svgr/rollup'
 import { terser } from 'rollup-plugin-terser'
 
 import postcssAutoprefixer from 'autoprefixer'
+import postcssInputRange from 'postcss-input-range'
 
 const packageJson = require('./package.json')
 
@@ -44,7 +45,7 @@ export default [
         autoModules: false,
         use: ['sass'],
         minimize: process.env.NODE_ENV !== 'development',
-        plugins: [postcssAutoprefixer]
+        plugins: [postcssAutoprefixer, postcssInputRange]
       }),
       json(),
       resolve(),      

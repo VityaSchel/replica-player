@@ -37,6 +37,11 @@
     height: 285px;
   }
 
+  &.other_speed {
+    width: 251px;
+    height: 153px;
+  }
+
   .otherSpeed {
     border: none;
     background-color: transparent;
@@ -48,5 +53,40 @@
     height: 100%;
     cursor: pointer;
     font-size: inherit;
+  }
+
+  .otherSpeedContainer {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 10px;
+    gap: 10px;
+
+    .otherSpeedRange {
+      -webkit-appearance: none;
+      cursor: pointer;
+      padding: 8px 0;
+      background: transparent;
+      width: 150px;
+
+      &::range-thumb {
+        -webkit-appearance: none;
+        background-color: rgb(255, 120, 0);
+        width: 20px;
+        height: 20px;
+        margin-top: -7.5px;
+        border-radius: 50px;
+      }
+
+      &::range-track {
+        background: linear-gradient(to right, #fff var(--progress), rgba(255,255,255,.2) var(--progress));
+        height: 5px;
+      }
+    }
+
+    .progress {
+      font-size: 16.5px;
+    }
   }
 }
