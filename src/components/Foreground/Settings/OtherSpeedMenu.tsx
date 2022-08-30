@@ -1,19 +1,16 @@
 import React from 'react'
 import styles from './styles.module.scss'
 import { useTranslation } from 'react-i18next'
-import { useAppSelector } from '/store/hooks'
-import { selectPlaybackPlayerSpeed } from '/store/slices/playback'
 import Menu from './Menu'
-import MenuItem from './Menu/item'
 import MenuTitle from './Menu/title'
 import { PlayerContext } from '/components/player'
+import { SettingsContext } from './index'
 
 export default function OtherSpeedMenu() {
   const { t } = useTranslation()
-  const playbackSpeed = useAppSelector(selectPlaybackPlayerSpeed)
   const player = React.useContext(PlayerContext)
-  // const range = React.useRef<HTMLInputElement>(null)
   const [progress, setProgress] = React.useState(0)
+  const settingsContext = React.useContext(SettingsContext)
 
   const setSpeed = (newSpeed: number) => {
     if(!player) return
@@ -25,7 +22,7 @@ export default function OtherSpeedMenu() {
     <Menu>
       <MenuTitle 
         title={t('player.settings.speed_menu.other_speed')} 
-        onClick={() => {}}
+        onClick={() => settingsContext.setTab('speed')}
       />
       <div className={styles.otherSpeedContainer}>
         <input 

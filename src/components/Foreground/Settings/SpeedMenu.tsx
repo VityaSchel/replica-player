@@ -8,11 +8,13 @@ import MenuItem from './Menu/item'
 import MenuTitle from './Menu/title'
 import CheckIcon from './icons/check.svg'
 import { PlayerContext } from '/components/player'
+import { SettingsContext } from './index'
 
 export default function SpeedMenu() {
   const { t } = useTranslation()
   const playbackSpeed = useAppSelector(selectPlaybackPlayerSpeed)
   const player = React.useContext(PlayerContext)
+  const settingsContext = React.useContext(SettingsContext)
 
   const setSpeed = (newSpeed: number) => {
     if(!player) return
@@ -24,9 +26,14 @@ export default function SpeedMenu() {
     <Menu>
       <MenuTitle 
         title={t('player.settings.speed_menu.title')} 
-        onClick={() => {}}
+        onClick={() => settingsContext.setTab('main')}
         endAdornment={
-          <button className={styles.otherSpeed}>{t('player.settings.speed_menu.other')}</button>
+          <button 
+            className={styles.otherSpeed} 
+            onClick={() => settingsContext.setTab('other_speed')}
+          >
+            {t('player.settings.speed_menu.other')}
+          </button>
         }
       />
       {[0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2].map(itemSpeedLabel => (
