@@ -1,5 +1,10 @@
+import { VideoQuality } from '/store/slices/playsource'
+
 export interface PlayerProps {
-  src: string
+  src: {
+    uri: string
+    quality: VideoQuality
+  }[]
   width?: number
   height?: number
   resizeMode?: 'fit' | 'cover' | 'fill'

@@ -1,5 +1,5 @@
 import { store, mEvent } from './index'
-import { setMuted, setPlaybackState, setVolume, setCurrentTime } from '/store/slices/playback'
+import { setMuted, setPlaybackState, setVolume, setCurrentTime, setSpeed } from '/store/slices/playback'
 import { setDuration } from '/store/slices/playsource'
 
 export function onVolumeChange(event: mEvent) {
@@ -24,4 +24,9 @@ export function onDurationChange(event: mEvent) {
 export function onTimeUpdate(event: mEvent) {
   const player = event.currentTarget
   store.dispatch(setCurrentTime(player.currentTime))
+}
+
+export function onRateChange(event: mEvent) {
+  const player = event.currentTarget
+  store.dispatch(setSpeed(player.playbackRate))
 }

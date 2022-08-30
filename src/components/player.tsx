@@ -14,9 +14,32 @@ import type { PlayerProps } from '/types/props'
 export { PlayerProps }
 import * as events from '/events/component'
 import { applyEvents } from '/events/index'
+import { VideoQualities } from '/store/slices/playsource'
 
 const propsSchema = {
-  src: Yup.string()
+  src: Yup.array()
+    .of(
+      Yup.object()
+        .shape({
+          uri: Yup.string().required(),
+          quality: Yup.lazy(
+            quality => typeof quality === 'string'
+              ? (
+                Yup.string()
+                  .oneOf(VideoQualities)
+                  .required()
+              ) : (
+                Yup.object()
+                  .shape({
+                    width: Yup.number().integer().required(),
+                    height: Yup.number().integer().required(),
+                    fps: Yup.number().integer().required(),
+                  })
+                  .required()
+              )
+          )
+        })
+    )
     .required(),
   width: Yup.number(),
   height: Yup.number(),
