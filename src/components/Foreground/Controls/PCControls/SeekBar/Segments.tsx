@@ -3,7 +3,7 @@ import styles from './styles.module.scss'
 import { SeekContext } from '/components/Foreground/Controls/PCControls/SeekBar'
 import { PlayerContext, PlayerProps } from '/components/player'
 import { useAppSelector } from '/store/hooks'
-import { selectPlaysourceVideoDuration } from '/store/slices/playsource'
+import { selectDuration } from '/store/slices/playsource'
 import cx from 'classnames'
 
 type Segments = { width: number, startingPosition: number }[]
@@ -11,7 +11,7 @@ type Segments = { width: number, startingPosition: number }[]
 export default function Segments(props: PlayerProps) {
   const player = React.useContext(PlayerContext)
   const [segments, setSegments] = React.useState<Segments>([])
-  const playsourceDuration = useAppSelector(selectPlaysourceVideoDuration)
+  const playsourceDuration = useAppSelector(selectDuration)
 
   React.useEffect(() => {
     if (!props.segments?.length || !playsourceDuration) {

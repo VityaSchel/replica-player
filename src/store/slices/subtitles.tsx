@@ -4,14 +4,17 @@ import { RootState } from '/store'
 
 export interface SubtitlesState {
   enabled: boolean
-  fileID: string | null
-  name: string | null
+  selectedSubtitlesFileID: string | null
+  subtitles: {
+    fileID: string | null
+    name: string | null
+  }[]
 }
 
 const initialState: SubtitlesState = {
   enabled: false,
-  fileID: null,
-  name: null
+  selectedSubtitlesFileID: null,
+  subtitles: []
 }
 
 export const subtitlesSlice = createSlice({
@@ -21,20 +24,21 @@ export const subtitlesSlice = createSlice({
     setSubtitlesEnabled: (state, action: PayloadAction<SubtitlesState['enabled']>) => {
       state.enabled = action.payload
     },
-    setSubtitlesFileID: (state, action: PayloadAction<SubtitlesState['fileID']>) => {
-      state.fileID = action.payload
+    setSubtitlesFileID: (state, action: PayloadAction<SubtitlesState['selectedSubtitlesFileID']>) => {
+      state.selectedSubtitlesFileID = action.payload
     },
-    setSubtitlesName: (state, action: PayloadAction<SubtitlesState['name']>) => {
-      state.name = action.payload
+    setSubtitlesList: (state, action: PayloadAction<SubtitlesState['subtitles']>) => {
+      state.subtitles = action.payload
     },
   }
 })
 
-export const { setSubtitlesEnabled, setSubtitlesFileID, setSubtitlesName } = subtitlesSlice.actions
+export const { setSubtitlesEnabled, setSubtitlesFileID, setSubtitlesList } = subtitlesSlice.actions
 
 export const selectSubtitles = (state: RootState) => state.subtitles
+export const selectSelectedSubtitles = (state: RootState) => state.subtitles.subtitles.find(({ fileID }) => fileID === state.subtitles.selectedSubtitlesFileID)
 export const selectSubtitlesEnabled = (state: RootState) => state.subtitles.enabled
-export const selectSubtitlesFileID = (state: RootState) => state.subtitles.fileID
-export const selectSubtitlesName = (state: RootState) => state.subtitles.name
+export const selectSubtitlesFileID = (state: RootState) => state.subtitles.selectedSubtitlesFileID
+export const selectSubtitlesList = (state: RootState) => state.subtitles.subtitles
 
 export default subtitlesSlice.reducer
