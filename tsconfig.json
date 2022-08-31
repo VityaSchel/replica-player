@@ -14,6 +14,7 @@
     "declarationDir": "types",
     "emitDeclarationOnly": true,
     "baseUrl": ".",
+    "rootDir": ".",
     "paths": {
       "/*": [
         "src/*"

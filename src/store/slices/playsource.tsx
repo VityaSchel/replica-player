@@ -10,38 +10,41 @@ export type VideoQuality = '144p' | '240p' | '360p' | '480p' | '720p' | '1080p' 
 export const VideoQualities = ['144p', '240p', '360p', '480p', '720p', '1080p', '1440p', '2160p', '4320p']
 
 export interface PlaysourceState {
-  sourceURI: string
+  selectedSourceURI: string | null
+  sources: {
+    sourceURI: string
+    quality: VideoQuality
+  }[]
   duration: number | null
-  quality: VideoQuality | null
 }
 
 const initialState: PlaysourceState = {
-  sourceURI: '',
-  duration: null,
-  quality: null
+  selectedSourceURI: null,
+  sources: [],
+  duration: null
 }
 
 export const playsourceSlice = createSlice({
   name: 'playsource',
   initialState,
   reducers: {
-    setSourceURI: (state, action: PayloadAction<PlaysourceState['sourceURI']>) => {
-      state.sourceURI = action.payload
+    setSourceURI: (state, action: PayloadAction<PlaysourceState['selectedSourceURI']>) => {
+      state.selectedSourceURI = action.payload
     },
-    setDuration: (state, action: PayloadAction<number>) => {
+    setSources: (state, action: PayloadAction<PlaysourceState['sources']>) => {
+      state.sources = action.payload
+    },
+    setDuration: (state, action: PayloadAction<PlaysourceState['duration']>) => {
       state.duration = action.payload
-    },
-    setQuality: (state, action: PayloadAction<PlaysourceState['quality']>) => {
-      state.quality = action.payload
-    },
+    }
   },
 })
 
-export const { setSourceURI, setDuration, setQuality } = playsourceSlice.actions
+export const { setSourceURI, setSources, setDuration } = playsourceSlice.actions
 
 export const selectPlaysource = (state: RootState) => state.playsource
-export const selectPlaysourceSourceURI = (state: RootState) => state.playsource.sourceURI
-export const selectPlaysourceVideoDuration = (state: RootState) => state.playsource.duration
-export const selectPlaysourceVideoQuality = (state: RootState) => state.playsource.quality
+export const selectSources = (state: RootState) => state.playsource.sources
+export const selectSelectedSource = (state: RootState) => state.playsource.sources.find(({ sourceURI }) => sourceURI === state.playsource.selectedSourceURI)
+export const selectDuration = (state: RootState) => state.playsource.duration
 
 export default playsourceSlice.reducer

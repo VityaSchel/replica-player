@@ -21,7 +21,8 @@
       },
       "subtitles_menu": {
         "title": "Субтитры",
-        "disabled": "Выкл."
+        "disabled": "Выкл.",
+        "none": "Нет"
       },
       "quality_menu": {
         "title": "Качество"

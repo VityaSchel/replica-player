@@ -61,7 +61,17 @@ const propsSchema = {
     .shape({
       container: Yup.object(),
       controls: Yup.object(),
-    })
+    }),
+  subtitles: Yup.array()
+    .of(
+      Yup.object()
+        .shape({
+          fileURI: Yup.string()
+            .required(),
+          name: Yup.string()
+            .required()
+        })
+    )
 } as const
 
 export const PlayerContext = React.createContext<undefined | HTMLVideoElement>(undefined)

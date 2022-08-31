@@ -13,6 +13,10 @@ export interface PlayerProps {
     container?: { [key: string]: any }
     controls?: { [key: string]: any }
   }
+  subtitles: {
+    fileURI: string
+    name: string
+  }[]
 }
 
 export interface Segment {
