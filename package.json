@@ -1,6 +1,6 @@
 {
   "name": "replica-player",
-  "version": "0.0.12",
+  "version": "0.1.0",
   "description": "Video-player for React that is identical to YouTube's player. YouTube video-player clone.",
   "scripts": {
     "dev": "NODE_ENV=development rollup -c --watch",
