@@ -90,16 +90,17 @@ export default function YourApp() {
 
 Props with types ending with `?` are optional.
 
-| Prop                      | Type                   | Default   | Description                                                         |
-| ------------------------- | ---------------------- | :-------- | ------------------------------------------------------------------- |
-| src                       | array of objects       | undefined | Media source. Array of either presets or custom quality. See below. |
-| width                     | number?                | 640       | Width of player's container. Can be overriden with css styles       |
-| height                    | number?                | 360       | Height of player's container. Can be overriden with css styles      |
-| resizeMode                | string?                | 'fit'     | One of 'fit', 'cover' and 'fill'                                    |
-| segments                  | [Segment](#segment)?[] | []        | Array of video segments                                             |
-| componentsProps           | object?                | undefined | Rest props for any components inside player                         |
-| componentsProps.container | object?                | undefined | Props for player's container div                                    |
-| componentsProps.controls  | object?                | undefined | Props for player's controls                                         |
+| Prop                      | Type                       | Default   | Description                                                         |
+| ------------------------- | -------------------------- | :-------- | ------------------------------------------------------------------- |
+| src                       | array of objects           | undefined | Media source. Array of either presets or custom quality. See below. |
+| width                     | number?                    | 640       | Width of player's container. Can be overriden with css styles       |
+| height                    | number?                    | 360       | Height of player's container. Can be overriden with css styles      |
+| resizeMode                | string?                    | 'fit'     | One of 'fit', 'cover' and 'fill'                                    |
+| segments                  | [Segment](#segment)?[]     | []        | Array of video segments                                             |
+| componentsProps           | object?                    | undefined | Rest props for any components inside player                         |
+| componentsProps.container | object?                    | undefined | Props for player's container div                                    |
+| componentsProps.controls  | object?                    | undefined | Props for player's controls                                         |
+| subtitles                 | [Subtitles](#subtitles)?[] | []        | Subtitles. Array of objects. See below.                             |
 
 #### `src` props
 
@@ -120,6 +121,15 @@ Video segment
 | --------- | ------ | :-------- | --------------------------------------------------- |
 | timeStart | number | undefined | Seconds from start of the video when segment starts |
 | title     | string | ""        | Title of segment                                    |
+
+#### Subtitles
+
+Currently not supported.
+
+| Prop    | Type   | Default | Description                      |
+| ------- | ------ | :------ | -------------------------------- |
+| fileURI | string | ''      | URI of file with subtitles       |
+| name    | string | ''      | Human-friendly name of subtitles |
 
 ### Ref API reference
 

@@ -6,8 +6,8 @@ export interface SubtitlesState {
   enabled: boolean
   selectedSubtitlesFileID: string | null
   subtitles: {
-    fileID: string | null
-    name: string | null
+    fileID: string
+    name: string
   }[]
 }
 

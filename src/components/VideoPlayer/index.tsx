@@ -8,6 +8,7 @@ import { useAppSelector } from '/store/hooks'
 import { selectSelectedSource, setSources, setSourceURI } from '/store/slices/playsource'
 import { setPlaybackState } from '/store/slices/playback'
 import { mergeRefs } from 'react-merge-refs'
+import { setSubtitlesList } from '/store/slices/subtitles'
 
 const VideoPlayer = React.forwardRef((props: PlayerProps, externalRef: React.LegacyRef<HTMLVideoElement>) => {
   const dispatch = useAppDispatch()
@@ -33,13 +34,16 @@ const VideoPlayer = React.forwardRef((props: PlayerProps, externalRef: React.Leg
       if(target) {
         target.currentTime = seekPosition 
         isPlaying && target.play()
-        // dispatch(setPlaybackState('playing'))
       }
       internalRef?.current?.removeEventListener('canplay', canPlay)
     }
     internalRef.current.addEventListener('canplay', canPlay)
   }, [internalRef, playsource])
   
+  React.useEffect(() => {
+    dispatch(setSubtitlesList(props.subtitles.map(subtitles => ({ fileID: subtitles.fileURI, name: subtitles.name }))))
+  }, [props.subtitles])
+
   return (
     <video 
       className={cx(styles.videoPlayer, { 

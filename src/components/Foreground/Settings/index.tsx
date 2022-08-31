@@ -5,6 +5,7 @@ import MainMenu from './MainMenu'
 import SpeedMenu from './SpeedMenu'
 import OtherSpeedMenu from './OtherSpeedMenu'
 import QualityMenu from './QualityMenu'
+import SubtitlesMenu from './SubtitlesMenu'
 import { useAppSelector } from '/store/hooks'
 import { selectSettingsMenuVisible } from '/store/slices/ui'
 
@@ -38,6 +39,7 @@ export default function Settings() {
         {settingsTab === 'speed' && <SpeedMenu />}
         {settingsTab === 'other_speed' && <OtherSpeedMenu />}
         {settingsTab === 'quality' && <QualityMenu />}
+        {settingsTab === 'subtitles' && <SubtitlesMenu />}
       </div>
     </SettingsContext.Provider>
   )
