@@ -9,6 +9,7 @@ import { selectSelectedSource, setSources, setSourceURI } from '/store/slices/pl
 import { setPlaybackState } from '/store/slices/playback'
 import { mergeRefs } from 'react-merge-refs'
 import { setSubtitlesList } from '/store/slices/subtitles'
+import { CircleIndicatorContext } from '/components/Foreground/Controls/PCControls'
 
 const VideoPlayer = React.forwardRef((props: PlayerProps, externalRef: React.LegacyRef<HTMLVideoElement>) => {
   const dispatch = useAppDispatch()
@@ -44,8 +45,20 @@ const VideoPlayer = React.forwardRef((props: PlayerProps, externalRef: React.Leg
     dispatch(setSubtitlesList(props.subtitles.map(subtitles => ({ fileID: subtitles.fileURI, name: subtitles.name }))))
   }, [props.subtitles])
 
+  const circleIndicator = React.useContext(CircleIndicatorContext)
+
+  const playPauseGesture = () => {
+    if(internalRef?.current?.paused) {
+      circleIndicator.call?.('play')
+      internalRef?.current?.play()
+    } else {
+      circleIndicator.call?.('pause')
+      internalRef?.current?.pause()
+    }
+  }
+
   return (
-    <video 
+    <video
       className={cx(styles.videoPlayer, { 
         [styles.aspectRatioModeFit]: props.resizeMode === 'fit',
         [styles.aspectRatioModeCover]: props.resizeMode === 'cover',
@@ -53,6 +66,8 @@ const VideoPlayer = React.forwardRef((props: PlayerProps, externalRef: React.Leg
       })}
 
       {...events}
+
+      onClick={playPauseGesture}
       
       ref={mergeRefs([internalRef, externalRef])}
     >
