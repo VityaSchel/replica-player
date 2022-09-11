@@ -9,7 +9,7 @@ import { selectSelectedSource, setSources, setSourceURI } from '/store/slices/pl
 import { setPlaybackState } from '/store/slices/playback'
 import { mergeRefs } from 'react-merge-refs'
 import { setSubtitlesList } from '/store/slices/subtitles'
-import { CircleIndicatorContext } from '/components/Foreground/Controls/PCControls'
+import { CircleIndicatorContext } from '../player'
 
 const VideoPlayer = React.forwardRef((props: PlayerProps, externalRef: React.LegacyRef<HTMLVideoElement>) => {
   const dispatch = useAppDispatch()

@@ -15,6 +15,9 @@ export { PlayerProps }
 import * as events from '/events/component'
 import { applyEvents } from '/events/index'
 import { VideoQualities } from '/store/slices/playsource'
+import { IndicatorType } from './Foreground/Controls/PCControls/CircleIndicator'
+
+export const CircleIndicatorContext = React.createContext<{ call?: (type: IndicatorType) => any, setCaller?: any }>({})
 
 const propsSchema = {
   src: Yup.array()
@@ -82,6 +85,7 @@ export default function Player(props: PlayerProps) {
   const playerRef = React.useRef<HTMLVideoElement>(null)
   const componentRef = React.useRef<HTMLDivElement>(null)
   const [playerComponent, setPlayerComponent] = React.useState<HTMLVideoElement>()
+  const [callCircleIndicator, setCirlceIndicatorCaller] = React.useState()
 
   React.useEffect(() => {
     Yup.object(propsSchema).validateSync(props)
@@ -98,28 +102,30 @@ export default function Player(props: PlayerProps) {
     <ReduxProvider store={store}>
       <PlayerContext.Provider value={playerComponent}>
         <PlayerComponentContext.Provider value={componentRef?.current}>
-          <NoStylesWarning />
-          <div
-            className={styles.replicaPlayer} 
-            style={{ 
-              display: 'none', // NoStylesWarning
+          <CircleIndicatorContext.Provider value={{ call: callCircleIndicator, setCaller: setCirlceIndicatorCaller }}>
+            <NoStylesWarning />
+            <div
+              className={styles.replicaPlayer} 
+              style={{ 
+                display: 'none', // NoStylesWarning
 
-              width: props.width, height: props.height
-            }}
-            onContextMenu={event => contextMenuRef.current?.open(event)}
-            {...props.componentsProps?.container}
-            ref={componentRef}
-          >
-            <VideoPlayer {...props} ref={playerRef} />
-            <div className={styles.foreground}>
-              <Title title='Test' {...props} />
-              <Controls {...props} />
-              <Loading {...props} />
+                width: props.width, height: props.height
+              }}
+              onContextMenu={event => contextMenuRef.current?.open(event)}
+              {...props.componentsProps?.container}
+              ref={componentRef}
+            >
+              <VideoPlayer {...props} ref={playerRef} />
+              <div className={styles.foreground}>
+                <Title title='Test' {...props} />
+                <Controls {...props} />
+                <Loading {...props} />
+              </div>
+              <NoSsr>
+                <ContextMenu ref={contextMenuRef} />
+              </NoSsr>
             </div>
-            <NoSsr>
-              <ContextMenu ref={contextMenuRef} />
-            </NoSsr>
-          </div>
+          </CircleIndicatorContext.Provider>
         </PlayerComponentContext.Provider>
       </PlayerContext.Provider>
     </ReduxProvider>

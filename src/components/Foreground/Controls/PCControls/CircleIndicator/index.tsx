@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './styles.module.scss'
 import cx from 'classnames'
-import { CircleIndicatorContext } from '../index'
+import { CircleIndicatorContext } from '/components/player'
 import PlayIcon from './icons/play.svg'
 import PauseIcon from './icons/pause.svg'
 import VolumeIncreaseIcon from './icons/volumeIncrease.svg'
