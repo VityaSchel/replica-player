@@ -15,6 +15,10 @@
 
   * {
     font-family: "YouTube Noto", Roboto, Arial, Helvetica, sans-serif;
+
+    &:focus {
+      outline: 0;
+    }
   }
 
   .videoPlayer {
