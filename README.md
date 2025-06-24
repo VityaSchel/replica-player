@@ -15,4 +15,4 @@ Publish a new version `npm publish`
 
 [MIT](./LICENSE)
 
-This project is not affiliated with YouTube or Google. Provided code does not replicate copyrighted YouTube parts and thus does not inherit its license.
+This project is not affiliated with YouTube or Google. Provided code does not replicate copyrighted YouTube parts and thus does not inherit its license. This project does not use any YouTube’s or Google’s assets protected by copyright.
