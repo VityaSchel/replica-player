@@ -1,0 +1,6 @@
+@import 'tailwindcss';
+
+@theme {
+	--font-sans: 'Roboto', Arial, Helvetica, sans-serif;
+	--breakpoint-480px: 30rem;
+}

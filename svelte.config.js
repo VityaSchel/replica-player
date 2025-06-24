@@ -6,7 +6,10 @@ const config = {
 	preprocess: vitePreprocess(),
 
 	kit: {
-		adapter: adapter()
+		adapter: adapter(),
+		alias: {
+			$m: 'src/lib/i18n/messages.js'
+		}
 	}
 }
 

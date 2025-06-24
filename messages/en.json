@@ -1,4 +1,8 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
-  "shareButton": "Share"
+  "shareButton": "Share",
+  "avatarAlternativeText": "Avatar of {name}",
+  "videoTitlePlaceholder": "Video by {author}",
+  "playButtonLabel": "Play video",
+  "unexpectedFatalError": "An unexpected error occurred. Please file an issue on Replica Player‘s GitHub."
 }

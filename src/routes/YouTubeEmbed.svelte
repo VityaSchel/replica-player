@@ -1,4 +1,4 @@
-<div class="flex-1 min-w-0 bg-neutral-400">
+<div class="flex-1 w-full min-w-0 bg-neutral-400">
 	<iframe
 		src="https://www.youtube.com/embed/MnrJzXM7a6o"
 		title="YouTube video player"

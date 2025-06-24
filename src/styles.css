@@ -1,0 +1,17 @@
+:root {
+	color-scheme: dark light;
+}
+
+.container-size {
+	container-type: size;
+}
+
+.geometric-precision {
+	text-rendering: geometricPrecision;
+}
+
+.fade-gradient {
+	background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAADGCAYAAAAT+OqFAAAAdklEQVQoz42QQQ7AIAgEF/T/D+kbq/RWAlnQyyazA4aoAB4FsBSA/bFjuF1EOL7VbrIrBuusmrt4ZZORfb6ehbWdnRHEIiITaEUKa5EJqUakRSaEYBJSCY2dEstQY7AuxahwXFrvZmWl2rh4JZ07z9dLtesfNj5q0FU3A5ObbwAAAABJRU5ErkJggg==');
+	background-size: 1px 198px;
+	background-repeat: repeat-x;
+}
