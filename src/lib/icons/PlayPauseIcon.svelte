@@ -1,6 +1,6 @@
 <script lang="ts">
 	let {
-		paused = $bindable()
+		paused
 	}: {
 		paused: boolean
 	} = $props()

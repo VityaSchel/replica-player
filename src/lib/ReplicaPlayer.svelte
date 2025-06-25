@@ -13,6 +13,7 @@
 	import type { Locale } from '$lib/i18n/runtime'
 	import { setContext } from 'svelte'
 	import PlayPauseIcon from '$lib/icons/PlayPauseIcon.svelte'
+	import MuteVolumeIcon from '$lib/icons/MuteVolumeIcon.svelte'
 
 	/* URL to the valid .vtt file. It must be on the same origin as `src` url, except for when `crossorigin` is set */
 	type VttFileUrl = string
@@ -73,7 +74,7 @@
 
 <ErrorBoundary>
 	<div
-		class="w-full h-full relative font-sans text-left text-white font-normal geometric-precision antialiased scheme-only-light"
+		class="w-full h-full relative font-sans text-left text-white font-normal geometric-precision antialiased scheme-only-light text-shadow-normal"
 	>
 		{#if title || author}
 			<div class="absolute left-0 top-0 z-[1] fade-gradient h-[99px] w-full pointer-events-none">
@@ -102,7 +103,7 @@
 							</a>
 						{/if}
 					</div>
-					<span class="text-[18px] truncate text-shadow-title text-[#EEE]">
+					<span class="text-[18px] truncate text-[#EEE]">
 						{title ?? videoTitlePlaceholder({ author: author!.name }, { locale })}
 					</span>
 				</div>
@@ -157,17 +158,25 @@
 		{/if}
 		{#if BROWSER && started}
 			<div
-				class="h-[98px] fade-gradient bg-bottom absolute bottom-0 left-0 w-full pointer-events-none flex items-end"
+				class="h-[98px] fade-gradient bg-bottom absolute bottom-0 left-0 w-full pointer-events-none flex items-end text-shadow-normal"
 			>
-				<div class="flex flex-col items-center h-[45px] pointer-events-auto">
+				<div
+					class="flex flex-col items-center h-[45px] pointer-events-auto transition-opacity duration-100"
+				>
 					<div class="h-[5px]"></div>
 					<div class="flex items-center h-10">
 						<button
-							class="w-[58px] pl-3 h-full flex items-center justify-center cursor-pointer"
+							class="w-[58px] pl-3 h-full flex items-center justify-center cursor-pointer opacity-90 hover:opacity-100 transition-opacity duration-100"
 							title={paused ? resumeButtonLabel({}, { locale }) : pauseButtonLabel({}, { locale })}
 							onclick={() => (paused = !paused)}
 						>
-							<PlayPauseIcon bind:paused />
+							<PlayPauseIcon {paused} />
+						</button>
+						<button
+							class="w-10 h-10 flex items-center justify-center cursor-pointer"
+							onclick={() => (muted = !muted)}
+						>
+							<MuteVolumeIcon {volume} {muted} />
 						</button>
 					</div>
 				</div>
@@ -177,7 +186,7 @@
 </ErrorBoundary>
 
 <style>
-	.text-shadow-title {
+	.text-shadow-normal {
 		text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
 	}
 </style>
