@@ -2,6 +2,7 @@
 	import { untrack } from 'svelte'
 
 	let { muted, volume }: { muted: boolean; volume: number } = $props()
+
 	let animateToLowVolume: SVGAnimateElement
 	let animateToHighVolume: SVGAnimateElement
 	let animateToMuted: SVGAnimateElement

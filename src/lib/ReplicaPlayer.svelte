@@ -1,19 +1,12 @@
 <script lang="ts">
-	import {
-		avatarAlternativeText,
-		videoTitlePlaceholder,
-		playButtonLabel,
-		resumeButtonLabel,
-		pauseButtonLabel
-	} from '$m'
-	import { getAvatarColor } from '$lib/avatars'
 	import { BROWSER } from 'esm-env'
-	import PlayButtonIcon from '$lib/icons/PlayButtonIcon.svelte'
-	import ErrorBoundary from '$lib/ErrorBoundary.svelte'
 	import type { Locale } from '$lib/i18n/runtime'
 	import { setContext } from 'svelte'
-	import PlayPauseIcon from '$lib/icons/PlayPauseIcon.svelte'
-	import MuteVolumeIcon from '$lib/icons/MuteVolumeIcon.svelte'
+	import type { Author } from '$lib/props'
+	import ErrorBoundary from '$lib/ErrorBoundary.svelte'
+	import Top from '$lib/Top.svelte'
+	import StartPlayButton from '$lib/StartPlayButton.svelte'
+	import Controls from '$lib/controls/Controls.svelte'
 
 	/* URL to the valid .vtt file. It must be on the same origin as `src` url, except for when `crossorigin` is set */
 	type VttFileUrl = string
@@ -41,7 +34,7 @@
 		captions?: { url: VttFileUrl; label: string; lang: BCP47LanguageTag }[]
 		subtitles?: { url: VttFileUrl; label: string; lang: BCP47LanguageTag }[]
 		// chapters?: { startMs: number; endMs: number; label: string }[]
-		author?: { name: string; avatarUrl?: string }
+		author?: Author
 	} & Pick<import('svelte/elements').SvelteHTMLElements['video'], 'crossorigin' | 'preload'> =
 		$props()
 
@@ -76,38 +69,12 @@
 	<div
 		class="w-full h-full relative font-sans text-left text-white font-normal geometric-precision antialiased scheme-only-light text-shadow-normal"
 	>
-		{#if title || author}
-			<div class="absolute left-0 top-0 z-[1] fade-gradient h-[99px] w-full pointer-events-none">
-				<div class="h-16 flex items-center pointer-events-auto pr-3">
-					<div class="p-[7px] pr-[5px]">
-						{#if author}
-							<a
-								href="/"
-								class="rounded-full m-[5px] aspect-square w-10 h-10 flex items-center justify-center container-size"
-								style="background-color: {author.avatarUrl
-									? 'transparent'
-									: getAvatarColor(author.name)};"
-								aria-label={author.avatarUrl
-									? undefined
-									: avatarAlternativeText({ name: author.name }, { locale })}
-							>
-								{#if author.avatarUrl}
-									<img
-										src={author.avatarUrl}
-										alt={avatarAlternativeText({ name: author.name }, { locale })}
-										class="bg-neutral-500 w-full h-full rounded-full border-0 outline-0 text-white text-[9px]"
-									/>
-								{:else}
-									<span class="uppercase text-white text-[50cqh]">{author.name.charAt(0)}</span>
-								{/if}
-							</a>
-						{/if}
-					</div>
-					<span class="text-[18px] truncate text-[#EEE]">
-						{title ?? videoTitlePlaceholder({ author: author!.name }, { locale })}
-					</span>
-				</div>
-			</div>
+		{#if title && author}
+			<Top {title} {author} />
+		{:else if title}
+			<Top {title} />
+		{:else if author}
+			<Top {author} />
 		{/if}
 		<!-- svelte-ignore a11y_media_has_caption -->
 		<video
@@ -145,42 +112,15 @@
 			{/if}
 		</video>
 		{#if BROWSER && !started}
-			<button
-				class="absolute top-0 left-0 w-full h-full cursor-pointer flex items-center justify-center"
-				title={playButtonLabel({}, { locale })}
+			<StartPlayButton
 				onclick={() => {
 					started = true
 					paused = false
 				}}
-			>
-				<PlayButtonIcon />
-			</button>
+			/>
 		{/if}
 		{#if BROWSER && started}
-			<div
-				class="h-[98px] fade-gradient bg-bottom absolute bottom-0 left-0 w-full pointer-events-none flex items-end text-shadow-normal"
-			>
-				<div
-					class="flex flex-col items-center h-[45px] pointer-events-auto transition-opacity duration-100"
-				>
-					<div class="h-[5px]"></div>
-					<div class="flex items-center h-10">
-						<button
-							class="w-[58px] pl-3 h-full flex items-center justify-center cursor-pointer opacity-90 hover:opacity-100 transition-opacity duration-100"
-							title={paused ? resumeButtonLabel({}, { locale }) : pauseButtonLabel({}, { locale })}
-							onclick={() => (paused = !paused)}
-						>
-							<PlayPauseIcon {paused} />
-						</button>
-						<button
-							class="w-10 h-10 flex items-center justify-center cursor-pointer"
-							onclick={() => (muted = !muted)}
-						>
-							<MuteVolumeIcon {volume} {muted} />
-						</button>
-					</div>
-				</div>
-			</div>
+			<Controls bind:paused bind:muted bind:volume />
 		{/if}
 	</div>
 </ErrorBoundary>

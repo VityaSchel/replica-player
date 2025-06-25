@@ -1,8 +1,7 @@
 <script lang="ts">
-	import { getContext } from 'svelte'
 	import ErrorIcon from '$lib/icons/ErrorIcon.svelte'
 	import { unexpectedFatalError } from '$m'
-	import type { Locale } from '$lib/i18n/runtime'
+	import { getLang } from '$lib/context'
 
 	let {
 		children
@@ -10,7 +9,7 @@
 		children: import('svelte').Snippet
 	} = $props()
 
-	const locale = getContext<Locale | undefined>('replicaPlayer_locale')
+	const locale = getLang()
 </script>
 
 <svelte:boundary onerror={() => {}}>
