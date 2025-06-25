@@ -3,6 +3,10 @@
 	"version": "1.0.0",
 	"author": "Viktor Shchelochkov <hi@hloth.dev> (https://hloth.dev)",
 	"license": "MIT",
+	"funding": "https://hloth.dev/donate",
+	"homepage": "https://github.com/VityaSchel/replica-player#readme",
+	"repository": "github:VityaSchel/replica-player.git",
+	"bugs": "https://github.com/VityaSchel/replica-player/issues",
 	"devDependencies": {
 		"@eslint/compat": "^1.2.5",
 		"@eslint/js": "^9.18.0",
