@@ -1,20 +1,21 @@
 <script lang="ts">
-	import { resumeButtonLabel, pauseButtonLabel } from '$m'
-	import PlayPauseIcon from '$lib/icons/PlayPauseIcon.svelte'
-	import MuteVolumeIcon from '$lib/icons/MuteVolumeIcon.svelte'
-	import { getLang } from '$lib/context'
+	import PlayPauseButton from '$lib/controls/PlayPauseButton.svelte'
+	import VolumeControls from '$lib/controls/VolumeControls.svelte'
+	import TimeClock from '$lib/controls/TimeClock.svelte'
 
 	let {
 		paused = $bindable(),
 		muted = $bindable(),
-		volume = $bindable()
+		volume = $bindable(),
+		currentTime,
+		duration
 	}: {
 		paused: boolean
 		muted: boolean
 		volume: number
+		currentTime: number
+		duration: number
 	} = $props()
-
-	const locale = getLang()
 </script>
 
 <div
@@ -25,19 +26,9 @@
 	>
 		<div class="h-[5px]"></div>
 		<div class="flex items-center h-10">
-			<button
-				class="w-[58px] pl-3 h-full flex items-center justify-center cursor-pointer opacity-90 hover:opacity-100 transition-opacity duration-100"
-				title={paused ? resumeButtonLabel({}, { locale }) : pauseButtonLabel({}, { locale })}
-				onclick={() => (paused = !paused)}
-			>
-				<PlayPauseIcon {paused} />
-			</button>
-			<button
-				class="w-10 h-10 flex items-center justify-center cursor-pointer"
-				onclick={() => (muted = !muted)}
-			>
-				<MuteVolumeIcon {volume} {muted} />
-			</button>
+			<PlayPauseButton bind:paused />
+			<VolumeControls bind:muted bind:volume />
+			<TimeClock {currentTime} {duration} />
 		</div>
 	</div>
 </div>

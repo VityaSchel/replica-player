@@ -120,7 +120,7 @@
 			/>
 		{/if}
 		{#if BROWSER && started}
-			<Controls bind:paused bind:muted bind:volume />
+			<Controls bind:paused bind:muted bind:volume {currentTime} {duration} />
 		{/if}
 	</div>
 </ErrorBoundary>
