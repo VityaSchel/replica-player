@@ -9,6 +9,7 @@ export default defineConfig({
 			project: './project.inlang',
 			outdir: './src/lib/i18n/',
 			strategy: ['preferredLanguage', 'baseLocale'],
+			isServer: 'typeof window === "undefined"'
 		}),
 		tailwindcss(),
 		sveltekit()

@@ -1,11 +1,18 @@
 <script lang="ts">
-	import { avatarAlternativeText, videoTitlePlaceholder, playButtonLabel } from '$m'
+	import {
+		avatarAlternativeText,
+		videoTitlePlaceholder,
+		playButtonLabel,
+		resumeButtonLabel,
+		pauseButtonLabel
+	} from '$m'
 	import { getAvatarColor } from '$lib/avatars'
 	import { BROWSER } from 'esm-env'
 	import PlayButtonIcon from '$lib/icons/PlayButtonIcon.svelte'
 	import ErrorBoundary from '$lib/ErrorBoundary.svelte'
 	import type { Locale } from '$lib/i18n/runtime'
 	import { setContext } from 'svelte'
+	import PlayPauseIcon from '$lib/icons/PlayPauseIcon.svelte'
 
 	/* URL to the valid .vtt file. It must be on the same origin as `src` url, except for when `crossorigin` is set */
 	type VttFileUrl = string
@@ -147,6 +154,24 @@
 			>
 				<PlayButtonIcon />
 			</button>
+		{/if}
+		{#if BROWSER && started}
+			<div
+				class="h-[98px] fade-gradient bg-bottom absolute bottom-0 left-0 w-full pointer-events-none flex items-end"
+			>
+				<div class="flex flex-col items-center h-[45px] pointer-events-auto">
+					<div class="h-[5px]"></div>
+					<div class="flex items-center h-10">
+						<button
+							class="w-[58px] pl-3 h-full flex items-center justify-center cursor-pointer"
+							title={paused ? resumeButtonLabel({}, { locale }) : pauseButtonLabel({}, { locale })}
+							onclick={() => (paused = !paused)}
+						>
+							<PlayPauseIcon bind:paused />
+						</button>
+					</div>
+				</div>
+			</div>
 		{/if}
 	</div>
 </ErrorBoundary>
