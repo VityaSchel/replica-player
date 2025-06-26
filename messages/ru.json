@@ -6,5 +6,7 @@
 	"playButtonLabel": "Воспроизвести видео",
 	"unexpectedFatalError": "Произошла непредвиденная ошибка. Пожалуйста, сообщите об этом в репозиторий Replica Player на GitHub.",
 	"resumeButtonLabel": "Воспроизвести",
-	"pauseButtonLabel": "Пауза"
+	"pauseButtonLabel": "Пауза",
+	"enterFullscreenButtonLabel": "Во весь экран",
+	"exitFullscreenButtonLabel": "Выход из полноэкранного режима"
 }

@@ -38,7 +38,8 @@
 	} & Pick<import('svelte/elements').SvelteHTMLElements['video'], 'crossorigin' | 'preload'> =
 		$props()
 
-	let player: HTMLVideoElement
+	let player: HTMLDivElement
+	let video: HTMLVideoElement
 	let currentTime: HTMLVideoElement['currentTime'] = $state(0)
 	let playbackRate: HTMLVideoElement['playbackRate'] = $state(1)
 	let paused: HTMLVideoElement['paused'] = $state(true)
@@ -68,6 +69,7 @@
 <ErrorBoundary>
 	<div
 		class="w-full h-full relative font-sans text-left text-white font-normal geometric-precision antialiased scheme-only-light text-shadow-normal"
+		bind:this={player}
 	>
 		{#if title && author}
 			<Top {title} {author} />
@@ -97,7 +99,7 @@
 			bind:ended
 			bind:readyState
 			bind:played
-			bind:this={player}
+			bind:this={video}
 		>
 			{#if captions}
 				{#each captions as track (track.url)}
@@ -120,7 +122,14 @@
 			/>
 		{/if}
 		{#if BROWSER && started}
-			<Controls bind:paused bind:muted bind:volume {currentTime} {duration} />
+			<Controls
+				bind:paused
+				bind:muted
+				bind:volume
+				{currentTime}
+				{duration}
+				onfullscreen={() => player.requestFullscreen()}
+			/>
 		{/if}
 	</div>
 </ErrorBoundary>

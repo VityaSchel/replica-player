@@ -6,5 +6,7 @@
 	"playButtonLabel": "Play video",
 	"unexpectedFatalError": "An unexpected error occurred. Please file an issue on Replica Player‘s GitHub.",
 	"resumeButtonLabel": "Resume",
-	"pauseButtonLabel": "Pause"
+	"pauseButtonLabel": "Pause",
+	"enterFullscreenButtonLabel": "Enter fullscreen",
+	"exitFullscreenButtonLabel": "Exit fullscreen"
 }
