@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { untrack } from 'svelte'
+	import { watch } from 'runed'
 
 	let { muted, volume }: { muted: boolean; volume: number } = $props()
 
@@ -14,25 +15,32 @@
 		if (muted) {
 			animateToMuted.beginElement()
 			animateToMuted2.beginElement()
-			if (untrack(() => volume) < 0.5) {
+			if (untrack(() => volume < 0.5)) {
 				animateToHighVolume.beginElement()
 			}
 		} else {
 			animateToUnmuted.beginElement()
 			animateToUnmuted2.beginElement()
-			if (untrack(() => volume) < 0.5) {
+			if (untrack(() => volume < 0.5)) {
 				animateToLowVolume.beginElement()
 			}
 		}
 	})
 
-	$effect(() => {
-		if (volume < 0.5) {
-			if (untrack(() => !muted)) animateToLowVolume.beginElement()
-		} else {
-			if (untrack(() => !muted)) animateToHighVolume.beginElement()
+	watch(
+		() => volume,
+		(cur, prev) => {
+			if (!muted && (prev === undefined || prev >= 0.5) && cur < 0.5)
+				animateToLowVolume.beginElement()
 		}
-	})
+	)
+	watch(
+		() => volume,
+		(cur, prev) => {
+			if (!muted && (prev === undefined || prev < 0.5) && cur >= 0.5)
+				animateToHighVolume.beginElement()
+		}
+	)
 
 	const maskId = $props.id()
 

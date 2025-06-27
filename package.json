@@ -70,6 +70,7 @@
 	"types": "./dist/index.d.ts",
 	"dependencies": {
 		"esm-env": "^1.2.2",
+		"runed": "^0.29.1",
 		"svelte-adapter-bun-next": "^1.0.3"
 	}
 }
