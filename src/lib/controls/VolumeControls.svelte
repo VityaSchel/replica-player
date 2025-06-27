@@ -12,7 +12,7 @@
 
 <div class="flex items-center">
 	<button
-		class="w-10 h-10 flex items-center justify-center cursor-pointer opacity-90 hover:opacity-100 transition-opacity duration-100"
+		class="w-10 h-10 flex items-center justify-center cursor-pointer opacity-90 hover:opacity-100 transition-opacity duration-100 ease-in-sin-alt"
 		onclick={() => {
 			muted = !muted
 			if (!muted && volume === 0) {
@@ -25,7 +25,7 @@
 	</button>
 	<div
 		class={[
-			'transition-[width,margin] duration-200 shrink-0 overflow-clip flex self-stretch items-center ease-volume-controls-width',
+			'transition-[width,margin] duration-200 shrink-0 overflow-clip flex self-stretch items-center ease-in-sin-alt',
 			{
 				'w-0 mr-0': !showVolumeSlider,
 				'w-[52px] mr-[3px]': showVolumeSlider
@@ -61,10 +61,6 @@
 		}
 		&::-webkit-slider-thumb {
 			appearance: none;
-			// position: absolute;
-			// top: 50%;
-			// left: calc(var(--value, 0) * 40px);
-			// transform: translateY(-50%);
 			margin-top: -6px + 1.5px;
 			@include range-thumb;
 		}

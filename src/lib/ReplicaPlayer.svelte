@@ -1,18 +1,13 @@
 <script lang="ts">
 	import { BROWSER } from 'esm-env'
-	import type { Locale } from '$lib/i18n/runtime'
 	import { setContext } from 'svelte'
-	import type { Author } from '$lib/props'
 	import ErrorBoundary from '$lib/ErrorBoundary.svelte'
 	import Top from '$lib/Top.svelte'
 	import StartPlayButton from '$lib/StartPlayButton.svelte'
 	import Controls from '$lib/controls/Controls.svelte'
-
-	/* URL to the valid .vtt file. It must be on the same origin as `src` url, except for when `crossorigin` is set */
-	type VttFileUrl = string
-
-	/* BCP 47 language tag. https://r12a.github.io/app-subtags/ */
-	type BCP47LanguageTag = string
+	import type { Locale } from '$lib/i18n/runtime'
+	import type { Author } from '$lib/props'
+	import { transformTextTracks, type TextTrack, type TextTrackProp } from '$lib/text-tracks'
 
 	let {
 		src,
@@ -31,8 +26,8 @@
 		locale?: Locale
 		title?: string
 		thumbnail?: { url: string; width: number; height: number }[]
-		captions?: { url: VttFileUrl; label: string; lang: BCP47LanguageTag }[]
-		subtitles?: { url: VttFileUrl; label: string; lang: BCP47LanguageTag }[]
+		captions?: TextTrackProp
+		subtitles?: TextTrackProp
 		// chapters?: { startMs: number; endMs: number; label: string }[]
 		author?: Author
 	} & Pick<import('svelte/elements').SvelteHTMLElements['video'], 'crossorigin' | 'preload'> =
@@ -64,6 +59,21 @@
 	})
 
 	setContext<Locale | undefined>('replicaPlayer_locale', locale)
+
+	const textTracks: TextTrack[] = $derived(transformTextTracks(subtitles, captions))
+	let textTrackSelected: TextTrack['id'] | null = $state(null)
+
+	$effect(() => {
+		for (const { id } of textTracks) {
+			const element = video.textTracks.getTrackById(id)
+			if (!element) continue
+			if (id === textTrackSelected) {
+				element.mode = 'showing'
+			} else {
+				element.mode = 'disabled'
+			}
+		}
+	})
 </script>
 
 <ErrorBoundary>
@@ -101,17 +111,16 @@
 			bind:played
 			bind:this={video}
 		>
-			{#if captions}
-				{#each captions as track (track.url)}
-					<track kind="captions" src={track.url} label={track.label} srclang={track.lang} />
-				{/each}
-			{/if}
-
-			{#if subtitles}
-				{#each subtitles as track (track.url)}
-					<track kind="subtitles" src={track.url} label={track.label} srclang={track.lang} />
-				{/each}
-			{/if}
+			{#each textTracks as track (track.id)}
+				<track
+					id={track.id}
+					kind={track.kind}
+					src={track.url}
+					label={track.label}
+					srclang={track.lang}
+					default={textTrackSelected === track.id}
+				/>
+			{/each}
 		</video>
 		{#if BROWSER && !started}
 			<StartPlayButton
@@ -129,6 +138,8 @@
 				{currentTime}
 				{duration}
 				onfullscreen={() => player.requestFullscreen()}
+				{textTracks}
+				bind:textTrackSelected
 			/>
 		{/if}
 	</div>
@@ -137,5 +148,9 @@
 <style>
 	.text-shadow-normal {
 		text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+	}
+	video::cue {
+		margin-bottom: 20px;
+		background-position: 0px 10px;
 	}
 </style>

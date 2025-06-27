@@ -8,5 +8,6 @@
 	"resumeButtonLabel": "Resume",
 	"pauseButtonLabel": "Pause",
 	"enterFullscreenButtonLabel": "Enter fullscreen",
-	"exitFullscreenButtonLabel": "Exit fullscreen"
+	"exitFullscreenButtonLabel": "Exit fullscreen",
+	"subtitlesToggleButtonLabel": "Включить/выключить субтитры"
 }

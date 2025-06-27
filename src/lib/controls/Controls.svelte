@@ -3,6 +3,8 @@
 	import VolumeControls from '$lib/controls/VolumeControls.svelte'
 	import TimeClock from '$lib/controls/TimeClock.svelte'
 	import FullscreenButton from '$lib/controls/FullscreenButton.svelte'
+	import SubtitlesButton from '$lib/controls/SubtitlesButton.svelte'
+	import type { TextTrack } from '$lib/text-tracks'
 
 	let {
 		paused = $bindable(),
@@ -10,7 +12,9 @@
 		volume = $bindable(),
 		currentTime,
 		duration,
-		onfullscreen
+		onfullscreen,
+		textTracks,
+		textTrackSelected = $bindable()
 	}: {
 		paused: boolean
 		muted: boolean
@@ -18,6 +22,8 @@
 		currentTime: number
 		duration: number
 		onfullscreen: () => void
+		textTracks: TextTrack[]
+		textTrackSelected: TextTrack['id'] | null
 	} = $props()
 
 	let volumeControls: { shrink: () => void }
@@ -40,6 +46,7 @@
 				<TimeClock {currentTime} {duration} />
 			</div>
 			<div class="flex items-center shrink-0">
+				<SubtitlesButton {textTracks} bind:textTrackSelected />
 				<FullscreenButton onclick={onfullscreen} />
 			</div>
 		</div>

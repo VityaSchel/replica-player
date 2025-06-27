@@ -3,5 +3,5 @@
 @theme {
 	--font-sans: 'Roboto', Arial, Helvetica, sans-serif;
 	--breakpoint-480px: 30rem;
-	--ease-volume-controls-width: cubic-bezier(0.4, 0, 1, 1);
+	--ease-in-sin-alt: cubic-bezier(0.4, 0, 1, 1);
 }

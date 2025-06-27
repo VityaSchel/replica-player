@@ -30,7 +30,7 @@
 			onclick()
 		}
 	}}
-	class="h-full pr-3 cursor-pointer opacity-90 hover:opacity-100 transition-opacity duration-100"
+	class="h-full pr-3 cursor-pointer opacity-90 hover:opacity-100 transition-opacity duration-100 ease-in-sin-alt"
 	aria-live="polite"
 	aria-pressed={fullscreen}
 >
@@ -66,6 +66,8 @@
 </button>
 
 <style lang="scss">
+	@use 'sass:list';
+
 	$directions: (
 		tl: (
 			-1px,
@@ -92,7 +94,7 @@
 				transform: translate(0px, 0px);
 			}
 			50% {
-				transform: translate(#{nth($translate, 1)}, #{nth($translate, 2)});
+				transform: translate(#{list.nth($translate, 1)}, #{list.nth($translate, 2)});
 			}
 		}
 	}

@@ -8,5 +8,6 @@
 	"resumeButtonLabel": "Воспроизвести",
 	"pauseButtonLabel": "Пауза",
 	"enterFullscreenButtonLabel": "Во весь экран",
-	"exitFullscreenButtonLabel": "Выход из полноэкранного режима"
+	"exitFullscreenButtonLabel": "Выход из полноэкранного режима",
+	"subtitlesToggleButtonLabel": "Включить/выключить субтитры"
 }
